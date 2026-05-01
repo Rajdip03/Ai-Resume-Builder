@@ -3,20 +3,20 @@ import React from 'react'
 
 const Login = () => {
 
-  const [state, setState] = React.useState("login")
+  const [state, setState] = React.useState("Sign Up") //track which form is show
 
-  const [formData, setFormData] = React.useState({
+  const [formData, setFormData] = React.useState({ //Stores data what user is type
     name: '',
     email: '',
     password: ''
-  })
+  }) 
 
-  const handleChange = (e) => {
-    const { name, value } = e.target
-    setFormData(prev => ({ ...prev, [name]: value }))
-  }
+  const handleChange = (e) => { //updates form Data as user types
+    const { name, value } = e.target  //e.target is the input element that triggered the event. It destructures two things from it: 1) name → the input's name attribute (e.g. "email") 2) value → what the user just typed
+    setFormData(prev => ({ ...prev, [name]: value })) // updates only that field
+  } 
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e) => {  //fires when form is submitted
     e.preventDefault()
 
   }

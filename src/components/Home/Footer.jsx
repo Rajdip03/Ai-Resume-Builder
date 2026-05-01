@@ -25,7 +25,7 @@ const Footer = () => {
                             <li><a href="/" className="hover:text-green-600 transition">Company</a></li>
                             <li><a href="/" className="hover:text-green-600 transition">Blogs</a></li>
                             <li><a href="/" className="hover:text-green-600 transition">Community</a></li>
-                            <li><a href={Resume} download className="hover:text-green-600 transition">Careers<span className="text-xs text-white bg-green-600 rounded-md ml-2 px-2 py-1">Download Developer Resume ! </span></a></li>
+                            <li><a href="/" className="hover:text-green-600 transition">Careers</a></li>
                             <li><a href="/" className="hover:text-green-600 transition">About</a></li>
 
                         </ul>
@@ -54,7 +54,7 @@ const Footer = () => {
                             </svg>
                         </a>
                     </div>
-                    <p className="mt-3 text-center">© 2025 Resume Builder Develop by <p className='hover:text-green-500'>Rajdip Mondal</p></p>
+                    <p className="mt-3 text-center">© {new Date().getFullYear()} Resume Builder Develop by <p className='hover:text-green-500'>Rajdip Mondal</p></p>
                 </div>
             </footer>
             <style>{`
