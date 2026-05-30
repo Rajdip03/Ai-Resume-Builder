@@ -3,7 +3,10 @@ import React from 'react'
 
 const Login = () => {
 
-  const [state, setState] = React.useState("Sign Up") //track which form is show
+  const query = new URLSearchParams(window.location.search)
+  const urlState = query.get('state')
+
+  const [state, setState] = React.useState(urlState || "login") //track which form is show
 
   const [formData, setFormData] = React.useState({ //Stores data what user is type
     name: '',
@@ -22,7 +25,7 @@ const Login = () => {
   }
 
   return (
-    <div className='flex items-center justify-center min-h-screen bg-gray-50'>
+    <div className='flex items-center justify-center min-h-screen bg-gray-70'>
       <form
         onSubmit={handleSubmit}
         className="sm:w-[350px] w-full text-center border border-gray-300/60 rounded-2xl px-8 bg-white">
@@ -49,19 +52,19 @@ const Login = () => {
           <input type="password" name="password" placeholder="Password" className=" border-none outline-none ring-0" value={formData.password} onChange={handleChange} required />
         </div>
 
-        <div className="mt-4 text-left text-indigo-500">
+        <div className="mt-4 text-left text-green-500">
           <button className="text-sm" type='reset'>
             Forget password?
           </button>
         </div>
 
-        <button type="submit" className="mt-2 w-full h-11 rounded-full text-white bg-indigo-500 hover:opacity-90 transition-opacity" >
+        <button type="submit" className="mt-2 w-full h-11 rounded-full text-white bg-green-500 hover:opacity-90 transition-opacity" >
           {state === "login" ? "Login" : "Sign up"}
         </button>
 
         <p onClick={() => setState(prev => prev === "login" ? "register" : "login")} className="text-gray-400 text-sm mt-3 mb-11 cursor-pointer" >
           {state === "login" ? "Don't have an account?" : "Already have an account?"}
-          <span className="text-indigo-400 hover:underline ml-1">click here</span>
+          <span className="text-green-400 hover:underline ml-1">click here</span>
         </p>
       </form>
 

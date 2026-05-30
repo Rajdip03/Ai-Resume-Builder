@@ -54,7 +54,7 @@ const Footer = () => {
                             </svg>
                         </a>
                     </div>
-                    <p className="mt-3 text-center">© {new Date().getFullYear()} Resume Builder Develop by <p className='hover:text-green-500'>Rajdip Mondal</p></p>
+                    <p className="mt-3 text-center">© {new Date().getFullYear()} AI Resume Builder Develop by <p className='hover:text-green-500'>Rajdip Mondal</p></p>
                 </div>
             </footer>
             <style>{`
