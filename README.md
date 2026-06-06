@@ -42,5 +42,4 @@ Follow these steps to set up the project locally.
 
 1. **Clone the repository:**
    ```bash
-   git clone [https://github.com/your-username/ai-resume-builder.git](https://github.com/your-username/ai-resume-builder.git)
-   cd ai-resume-builder
+   git clone [https://github.com/Rajdip03/Ai-Resume-Builder.git]
