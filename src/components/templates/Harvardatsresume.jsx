@@ -10,33 +10,33 @@ const HarvardATSResume = ({ data, accentColor }) => {
 
     // ── Skill categorization by keyword matching ──────────────────────────────
     const LANG_KW = new Set([
-        "javascript","typescript","python","java","c++","c#","c","ruby","go",
-        "golang","rust","swift","kotlin","php","perl","scala","r","matlab","dart",
-        "lua","shell","bash","sql","html","html5","css","css3","sass","less",
-        "scss","objective-c","assembly","haskell","elixir","clojure","groovy",
-        "powershell","ocaml","f#","vba","cobol","fortran","lisp","prolog","tcl",
-        "solidity","move","apex","pl/sql","t-sql",
+        "javascript", "typescript", "python", "java", "c++", "c#", "c", "ruby", "go",
+        "golang", "rust", "swift", "kotlin", "php", "perl", "scala", "r", "matlab", "dart",
+        "lua", "shell", "bash", "sql", "html", "html5", "css", "css3", "sass", "less",
+        "scss", "objective-c", "assembly", "haskell", "elixir", "clojure", "groovy",
+        "powershell", "ocaml", "f#", "vba", "cobol", "fortran", "lisp", "prolog", "tcl",
+        "solidity", "move", "apex", "pl/sql", "t-sql",
     ]);
 
     const FRAMEWORK_KW = [
-        "react","angular","vue","next","nuxt","svelte","sveltekit","remix",
-        "gatsby","ember","backbone","express","fastapi","django","flask",
-        "spring","rails","laravel","nestjs","asp.net","blazor",".net","jquery",
-        "tailwind","bootstrap","material ui","mui","chakra","ant design",
-        "node","nodejs","deno","bun","electron","ionic","flutter",
-        "react native","graphql","rest api","rest apis","trpc","apollo",
-        "web accessibility","full stack development","redux","zustand",
-        "mobx","jotai","rxjs","socket.io","prisma","sequelize","mongoose",
-        "typeorm","drizzle","webpack","vite","rollup","parcel","esbuild",
-        "storybook","jest","vitest","cypress","playwright","testing library",
-        "three.js","d3","chart.js","framer motion",
+        "react", "angular", "vue", "next", "nuxt", "svelte", "sveltekit", "remix",
+        "gatsby", "ember", "backbone", "express", "fastapi", "django", "flask",
+        "spring", "rails", "laravel", "nestjs", "asp.net", "blazor", ".net", "jquery",
+        "tailwind", "bootstrap", "material ui", "mui", "chakra", "ant design",
+        "node", "nodejs", "deno", "bun", "electron", "ionic", "flutter",
+        "react native", "graphql", "rest api", "rest apis", "trpc", "apollo",
+        "web accessibility", "full stack development", "redux", "zustand",
+        "mobx", "jotai", "rxjs", "socket.io", "prisma", "sequelize", "mongoose",
+        "typeorm", "drizzle", "webpack", "vite", "rollup", "parcel", "esbuild",
+        "storybook", "jest", "vitest", "cypress", "playwright", "testing library",
+        "three.js", "d3", "chart.js", "framer motion",
     ];
 
     const DB_KW = new Set([
-        "mongodb","mysql","postgresql","postgres","sqlite","redis","cassandra",
-        "dynamodb","firebase","firestore","supabase","oracle","mariadb","couchdb",
-        "neo4j","elasticsearch","mssql","sql server","cockroachdb","fauna",
-        "influxdb","timescaledb","planetscale","neon","turso","airtable",
+        "mongodb", "mysql", "postgresql", "postgres", "sqlite", "redis", "cassandra",
+        "dynamodb", "firebase", "firestore", "supabase", "oracle", "mariadb", "couchdb",
+        "neo4j", "elasticsearch", "mssql", "sql server", "cockroachdb", "fauna",
+        "influxdb", "timescaledb", "planetscale", "neon", "turso", "airtable",
     ]);
 
     const categorizeSkills = (skills = []) => {
@@ -125,7 +125,7 @@ const HarvardATSResume = ({ data, accentColor }) => {
                 }}
             >
                 {/* ── Header ───────────────────────────────────────────────────── */}
-                <header style={{ textAlign: "center", marginBottom: "14px" }}>
+                <header style={{ textAlign: "center", marginBottom: "25px" }}>
                     {data.personal_info?.category && (
                         <p style={{ ...xs, fontStyle: "italic", textAlign: "right", marginBottom: "2px" }}>
                             {data.personal_info.category}
@@ -146,6 +146,15 @@ const HarvardATSResume = ({ data, accentColor }) => {
                     </p>
                 </header>
 
+                {/* ── Professional Summary ────────────────────────────────────────── */}
+                {data.professional_summary && (
+                    <section style={{ marginBottom: "12px" }}>
+                        <SectionHeading>Professional Summary</SectionHeading>
+                        <p style={{ ...xs, margin: "2px 0 0", lineHeight: "1.4" }}>
+                            {data.professional_summary}
+                        </p>
+                    </section>
+                )}
                 {/* ── Education ────────────────────────────────────────────────── */}
                 {data.education && data.education.length > 0 && (
                     <section style={{ marginBottom: "12px" }}>
@@ -214,8 +223,8 @@ const HarvardATSResume = ({ data, accentColor }) => {
                                                 {proj.start_date && proj.end_date
                                                     ? `${formatDate(proj.start_date)} – ${formatDate(proj.end_date)}`
                                                     : proj.start_date
-                                                    ? formatDate(proj.start_date)
-                                                    : formatDate(proj.end_date)}
+                                                        ? formatDate(proj.start_date)
+                                                        : formatDate(proj.end_date)}
                                             </span>
                                         )}
                                     </div>
