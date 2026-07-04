@@ -76,7 +76,7 @@ const PremiumCleanGridTemplate = ({ data, accentColor }) => {
                 )}
 
                 {/* Projects */}
-                {data.project && data.project.length > 0 && (
+                {(data.project || data.projects) && (data.project || data.projects).length > 0 && (
                     <section className="mb-8">
                         <div className="grid grid-cols-5 gap-6 mb-3">
                             <div className="col-span-1">
@@ -87,10 +87,16 @@ const PremiumCleanGridTemplate = ({ data, accentColor }) => {
                         <div className="grid grid-cols-5 gap-6">
                             <div className="col-span-1" />
                             <div className="col-span-4 grid grid-cols-2 gap-4">
-                                {data.project.map((proj, i) => (
-                                    <div key={i} className="border-l-2 pl-3" style={{ borderColor: accentColor }}>
-                                        <h3 className="font-bold text-sm text-gray-900">{proj.name}</h3>
-                                        <p className="text-xs text-gray-600 mt-1 leading-relaxed">{proj.description}</p>
+                                {(data.project || data.projects).map((proj, i) => (
+                                    <div key={i} className="border-l-2 pl-3 flex flex-col justify-between" style={{ borderColor: accentColor }}>
+                                        <div>
+                                            <h3 className="font-bold text-sm text-gray-900">{proj.name}</h3>
+                                            <p className="text-xs text-gray-600 mt-1 leading-relaxed">{proj.description}</p>
+                                        </div>
+                                        <div className="mt-2 text-[11px] text-gray-500 space-y-0.5">
+                                            {proj.tech_stack?.length > 0 && <div><strong>Tech:</strong> {proj.tech_stack.join(", ")}</div>}
+                                            {proj.link && <div><a href={proj.link} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">{proj.link}</a></div>}
+                                        </div>
                                     </div>
                                 ))}
                             </div>

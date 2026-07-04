@@ -155,18 +155,25 @@ const MinimalImageTemplate = ({ data, accentColor }) => {
                     )}
 
                     {/* Projects */}
-                    {data.project && data.project.length > 0 && (
+                    {(data.project || data.projects) && (data.project || data.projects).length > 0 && (
                         <section>
                             <h2 className="text-sm uppercase tracking-widest font-semibold" style={{ color: accentColor }}>
                                 PROJECTS
                             </h2>
                             <div className="space-y-4">
-                                {data.project.map((project, index) => (
+                                {(data.project || data.projects).map((project, index) => (
                                     <div key={index}>
                                         <h3 className="text-md font-medium text-zinc-800 mt-3">{project.name}</h3>
-                                        <p className="text-sm mb-1" style={{ color: accentColor }} >
-                                            {project.type}
-                                        </p>
+                                        {project.tech_stack?.length > 0 && (
+                                            <p className="text-sm mb-1" style={{ color: accentColor }} >
+                                                {project.tech_stack.join(", ")}
+                                            </p>
+                                        )}
+                                        {project.link && (
+                                            <p className="text-sm mb-1">
+                                                <a href={project.link} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">{project.link}</a>
+                                            </p>
+                                        )}
                                         {project.description && (
                                             <ul className="list-disc list-inside text-sm text-zinc-700  space-y-1">
                                                 {project.description.split("\n").map((line, i) => (

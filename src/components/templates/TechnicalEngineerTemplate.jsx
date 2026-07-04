@@ -107,17 +107,23 @@ const TechnicalEngineerTemplate = ({ data, accentColor }) => {
                 )}
 
                 {/* Projects */}
-                {data.project && data.project.length > 0 && (
+                {(data.project || data.projects) && (data.project || data.projects).length > 0 && (
                     <section>
                         <div className="text-sm mb-3">
                             <span style={{ color: accentColor }}>$ </span>
                             <span className="text-gray-300">git log --projects</span>
                         </div>
                         <div className="space-y-3">
-                            {data.project.map((proj, i) => (
+                            {(data.project || data.projects).map((proj, i) => (
                                 <div key={i} className="pl-4 border-l border-gray-700">
                                     <span className="text-sm font-bold text-yellow-400">[{proj.name}]</span>
                                     <p className="text-xs text-gray-400 mt-0.5 leading-relaxed">{proj.description}</p>
+                                    {(proj.tech_stack?.length > 0 || proj.link) && (
+                                        <div className="mt-1 flex flex-wrap gap-x-4 gap-y-1 text-xs text-gray-500">
+                                            {proj.tech_stack?.length > 0 && <span>--tech="{proj.tech_stack.join(", ")}"</span>}
+                                            {proj.link && <span>--link="<a href={proj.link} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">{proj.link}</a>"</span>}
+                                        </div>
+                                    )}
                                 </div>
                             ))}
                         </div>

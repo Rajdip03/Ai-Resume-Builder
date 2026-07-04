@@ -80,16 +80,28 @@ const ATSProCorporateTemplate = ({ data, accentColor }) => {
                 )}
 
                 {/* Projects */}
-                {data.project && data.project.length > 0 && (
+                {(data.project || data.projects) && (data.project || data.projects).length > 0 && (
                     <section>
                         <h2 className="text-xs font-bold tracking-widest uppercase mb-3 pb-1 border-b-2" style={{ color: accentColor, borderColor: accentColor }}>
                             Notable Projects
                         </h2>
                         <div className="space-y-3">
-                            {data.project.map((proj, i) => (
-                                <div key={i} className="flex gap-3">
-                                    <span className="font-bold text-sm text-gray-900 min-w-fit">{proj.name}:</span>
-                                    <span className="text-sm text-gray-700 leading-relaxed">{proj.description}</span>
+                            {(data.project || data.projects).map((proj, i) => (
+                                <div key={i} className="flex flex-col gap-1">
+                                    <div className="flex gap-3">
+                                        <span className="font-bold text-sm text-gray-900 min-w-fit">{proj.name}:</span>
+                                        <span className="text-sm text-gray-700 leading-relaxed">{proj.description}</span>
+                                    </div>
+                                    <div className="flex gap-4 text-xs text-gray-600">
+                                        {proj.tech_stack?.length > 0 && (
+                                            <span><strong>Tech:</strong> {proj.tech_stack.join(", ")}</span>
+                                        )}
+                                        {proj.link && (
+                                            <a href={proj.link} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
+                                                {proj.link}
+                                            </a>
+                                        )}
+                                    </div>
                                 </div>
                             ))}
                         </div>

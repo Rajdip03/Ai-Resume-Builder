@@ -95,20 +95,30 @@ const ModernTemplate = ({ data, accentColor }) => {
 				)}
 
 				{/* Projects */}
-				{data.project && data.project.length > 0 && (
+				{(data.project || data.projects) && (data.project || data.projects).length > 0 && (
 					<section className="mb-8">
 						<h2 className="text-2xl font-light mb-4 pb-2 border-b border-gray-200">
 							Projects
 						</h2>
 
 						<div className="space-y-6">
-							{data.project.map((p, index) => (
+							{(data.project || data.projects).map((p, index) => (
 								<div key={index} className="relative pl-6 border-l border-gray-200" style={{borderLeftColor: accentColor}}>
 
 
 									<div className="flex justify-between items-start">
 										<div>
 											<h3 className="text-lg font-medium text-gray-900">{p.name}</h3>
+											{p.tech_stack?.length > 0 && (
+												<p className="text-sm text-gray-600 mt-1">
+													<strong>Tech Stack:</strong> {p.tech_stack.join(", ")}
+												</p>
+											)}
+											{p.link && (
+												<p className="text-sm mt-1">
+													<strong>Link:</strong> <a href={p.link} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">{p.link}</a>
+												</p>
+											)}
 										</div>
 									</div>
 									{p.description && (

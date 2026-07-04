@@ -87,14 +87,20 @@ const AcademicResearcherTemplate = ({ data, accentColor }) => {
                 )}
 
                 {/* Publications / Projects */}
-                {data.project && data.project.length > 0 && (
+                {(data.project || data.projects) && (data.project || data.projects).length > 0 && (
                     <section>
                         <h2 className="text-base font-bold uppercase tracking-widest mb-3" style={{ color: accentColor }}>Selected Publications & Projects</h2>
                         <ol className="space-y-3 list-decimal list-inside text-sm" style={{ fontFamily: "'Arial', sans-serif" }}>
-                            {data.project.map((proj, i) => (
-                                <li key={i}>
+                            {(data.project || data.projects).map((proj, i) => (
+                                <li key={i} className="mb-2">
                                     <span className="font-semibold text-gray-900">"{proj.name}."</span>{" "}
                                     <span className="text-gray-600 italic">{proj.description}</span>
+                                    {(proj.tech_stack?.length > 0 || proj.link) && (
+                                        <div className="ml-4 mt-1 text-gray-600 flex flex-wrap gap-4 text-xs">
+                                            {proj.tech_stack?.length > 0 && <span><strong>Tech:</strong> {proj.tech_stack.join(", ")}</span>}
+                                            {proj.link && <a href={proj.link} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">{proj.link}</a>}
+                                        </div>
+                                    )}
                                 </li>
                             ))}
                         </ol>
