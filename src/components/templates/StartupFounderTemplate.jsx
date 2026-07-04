@@ -80,14 +80,22 @@ const StartupFounderTemplate = ({ data, accentColor }) => {
                 )}
 
                 {/* Projects — bold grid */}
-                {data.project && data.project.length > 0 && (
+                {(data.project || data.projects) && (data.project || data.projects).length > 0 && (
                     <section className="mb-8">
                         <h2 className="text-xs font-black tracking-widest uppercase mb-4 text-gray-400">Things I've Shipped</h2>
                         <div className="grid grid-cols-2 gap-3">
-                            {data.project.map((proj, i) => (
-                                <div key={i} className="p-4 bg-gray-50 border-t-2" style={{ borderColor: accentColor }}>
-                                    <h3 className="font-black text-sm text-gray-900">{proj.name}</h3>
-                                    <p className="text-xs text-gray-600 mt-1 leading-relaxed">{proj.description}</p>
+                            {(data.project || data.projects).map((proj, i) => (
+                                <div key={i} className="p-4 bg-gray-50 border-t-2 flex flex-col justify-between" style={{ borderColor: accentColor }}>
+                                    <div>
+                                        <h3 className="font-black text-sm text-gray-900">{proj.name}</h3>
+                                        <p className="text-xs text-gray-600 mt-1 leading-relaxed">{proj.description}</p>
+                                    </div>
+                                    {(proj.tech_stack?.length > 0 || proj.link) && (
+                                        <div className="mt-3 text-[11px] text-gray-500 space-y-1 font-medium">
+                                            {proj.tech_stack?.length > 0 && <div><span className="text-gray-400 font-bold uppercase tracking-wider text-[9px]">Stack:</span> {proj.tech_stack.join(", ")}</div>}
+                                            {proj.link && <div><a href={proj.link} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">View Project ↗</a></div>}
+                                        </div>
+                                    )}
                                 </div>
                             ))}
                         </div>

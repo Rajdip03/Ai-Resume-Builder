@@ -71,12 +71,16 @@ export const dummyResumeData = [
             {
                 name: "Team Task Management System",
                 type: "Web Application (Productivity Tool)",
+                tech_stack: ["React.js", "Node.js", "MongoDB", "Express.js", "Mongoose", "JWT", "Bcrypt", "TailwindCSS", "PostgreSQL", "REST APIs", "google gemini"],
+                link: "https://github.com/rajdip Mondal/fullstack_Project_Task_Management",
                 description: "TaskTrackr is a collaborative task management system designed for teams to create, assign, track, and manage tasks in real time. ",
                 _id: "68d4f882c8f0d46dc8a8b139"
             },
             {
                 name: "EduHub - Online Learning Platform",
                 type: "Web Application (EdTech Platform)",
+                tech_stack: ["React.js", "Node.js", "MongoDB", "Express.js", "Mongoose", "JWT", "Bcrypt", "TailwindCSS", "PostgreSQL", "REST APIs", "google gemini"],
+                link: "https://github.com/Rajdip03/Ai-Resume-Builder",
                 description: "EduHub is an online learning platform where instructors can create courses with video lessons, quizzes, and downloadable resources.",
                 _id: "68d4f89dc8f0d46dc8a8b147"
             }
@@ -146,12 +150,16 @@ export const dummyResumeData = [
             {
                 name: "FitTrack - Fitness Dashboard",
                 type: "Web Application (Health & Fitness)",
+                tech_stack: ["React.js", "Node.js", "MongoDB", "Express.js", "Mongoose", "JWT", "Bcrypt", "TailwindCSS", "PostgreSQL", "REST APIs", "google gemini","Java","Python"],
+                link: "https://rajdip-portfolio-alpha.vercel.app/",
                 description: "FitTrack is a fitness analytics dashboard that allows users to log workouts, track progress, and visualize performance through interactive charts.",
                 _id: "78e3b42c2d5ff49286cc1494"
             },
             {
                 name: "ShopEase - E-commerce UI Kit",
                 type: "Frontend UI Kit",
+                tech_stack: ["React.js", "Node.js", "MongoDB", "Express.js", "Mongoose", "JWT", "Bcrypt", "TailwindCSS", "PostgreSQL", "REST APIs", "google gemini","Java","Python"],
+                link: "https://rajdip-myportfolio.netlify.app/",
                 description: "ShopEase is a modular e-commerce frontend template with ready-to-use components for product listing, cart management, and responsive navigation.",
                 _id: "78e3b42c2d5ff49286cc1495"
             }
@@ -221,12 +229,16 @@ export const dummyResumeData = [
             {
                 name: "Invoicr - Invoice Management System",
                 type: "Web Application (FinTech)",
+                tech_stack: ["React.js", "Node.js", "MongoDB", "Express.js", "Mongoose", "JWT", "Bcrypt", "TailwindCSS", "PostgreSQL", "REST APIs", "google gemini","Java","Python"],
+                link: "https://github.com/Rajdip03/Medicare-Smart-Health-Care-Platform",
                 description: "Invoicr is a secure web platform that allows freelancers and small businesses to generate, track, and automate professional invoices. Built with Node.js, MongoDB, and Stripe integration.",
                 _id: "89f4c53d3e6gg59397dd259l"
             },
             {
                 name: "API Monitor Dashboard",
                 type: "DevOps Tool",
+                tech_stack: ["React.js", "Node.js", "MongoDB", "Express.js", "Mongoose", "JWT", "Bcrypt", "TailwindCSS", "PostgreSQL", "REST APIs", "google gemini AI","Java","Python","Framer Motion"],
+                link: "https://github.com/Rajdip03/Ai-Resume-Builder",
                 description: "A real-time API monitoring dashboard for microservices. Tracks latency, uptime, and error rates using Prometheus and Grafana.",
                 _id: "89f4c53d3e6gg59397dd259m"
             }

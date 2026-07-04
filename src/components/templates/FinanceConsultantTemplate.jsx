@@ -73,17 +73,25 @@ const FinanceConsultantTemplate = ({ data, accentColor }) => {
                         )}
 
                         {/* Projects */}
-                        {data.project && data.project.length > 0 && (
+                        {(data.project || data.projects) && (data.project || data.projects).length > 0 && (
                             <section>
                                 <h2 className="text-xs font-bold tracking-widest uppercase text-center mb-4" style={{ color: accentColor }}>
                                     ── Engagements & Projects ──
                                 </h2>
                                 <div className="space-y-3">
-                                    {data.project.map((proj, i) => (
-                                        <div key={i} className="flex gap-3 text-xs" style={{ fontFamily: "'Arial', sans-serif" }}>
-                                            <span className="font-bold text-gray-900 min-w-fit">{proj.name}</span>
-                                            <span className="text-gray-400">|</span>
-                                            <span className="text-gray-600 leading-relaxed">{proj.description}</span>
+                                    {(data.project || data.projects).map((proj, i) => (
+                                        <div key={i} className="flex flex-col gap-1 text-xs" style={{ fontFamily: "'Arial', sans-serif" }}>
+                                            <div className="flex gap-3">
+                                                <span className="font-bold text-gray-900 min-w-fit">{proj.name}</span>
+                                                <span className="text-gray-400">|</span>
+                                                <span className="text-gray-600 leading-relaxed">{proj.description}</span>
+                                            </div>
+                                            {(proj.tech_stack?.length > 0 || proj.link) && (
+                                                <div className="flex gap-4 text-gray-500 mt-1 pl-4">
+                                                    {proj.tech_stack?.length > 0 && <span><strong>Tech:</strong> {proj.tech_stack.join(", ")}</span>}
+                                                    {proj.link && <a href={proj.link} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">{proj.link}</a>}
+                                                </div>
+                                            )}
                                         </div>
                                     ))}
                                 </div>

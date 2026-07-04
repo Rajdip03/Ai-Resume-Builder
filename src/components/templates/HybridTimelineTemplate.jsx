@@ -126,19 +126,25 @@ const HybridTimelineTemplate = ({ data, accentColor }) => {
                     )}
 
                     {/* Projects */}
-                    {data.project && data.project.length > 0 && (
+                    {(data.project || data.projects) && (data.project || data.projects).length > 0 && (
                         <section>
                             <h2 className="text-xs font-extrabold tracking-widest uppercase mb-4" style={{ color: accentColor }}>
                                 Projects
                             </h2>
                             <div className="grid grid-cols-2 gap-3">
-                                {data.project.map((proj, i) => (
-                                    <div key={i} className="p-3 border border-gray-100 rounded">
-                                        <div className="flex items-center gap-2 mb-1">
-                                            <div className="w-2 h-2 rounded-sm flex-shrink-0" style={{ backgroundColor: accentColor }} />
-                                            <h3 className="font-bold text-xs text-gray-900">{proj.name}</h3>
+                                {(data.project || data.projects).map((proj, i) => (
+                                    <div key={i} className="p-3 border border-gray-100 rounded flex flex-col justify-between">
+                                        <div>
+                                            <div className="flex items-center gap-2 mb-1">
+                                                <div className="w-2 h-2 rounded-sm flex-shrink-0" style={{ backgroundColor: accentColor }} />
+                                                <h3 className="font-bold text-xs text-gray-900">{proj.name}</h3>
+                                            </div>
+                                            <p className="text-xs text-gray-500 leading-relaxed pl-4">{proj.description}</p>
                                         </div>
-                                        <p className="text-xs text-gray-500 leading-relaxed pl-4">{proj.description}</p>
+                                        <div className="pl-4 mt-2 space-y-1 text-[10px] text-gray-400">
+                                            {proj.tech_stack?.length > 0 && <div><strong>Tech:</strong> {proj.tech_stack.join(", ")}</div>}
+                                            {proj.link && <div><a href={proj.link} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">{proj.link}</a></div>}
+                                        </div>
                                     </div>
                                 ))}
                             </div>

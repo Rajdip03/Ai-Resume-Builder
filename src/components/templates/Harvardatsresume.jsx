@@ -210,11 +210,11 @@ const HarvardATSResume = ({ data, accentColor }) => {
                 )}
 
                 {/* ── Projects ─────────────────────────────────────────────────── */}
-                {data.project && data.project.length > 0 && (
+                {(data.project || data.projects) && (data.project || data.projects).length > 0 && (
                     <section style={{ marginBottom: "12px" }}>
                         <SectionHeading>Projects</SectionHeading>
                         <div style={{ display: "flex", flexDirection: "column", gap: "7px" }}>
-                            {data.project.map((proj, i) => (
+                            {(data.project || data.projects).map((proj, i) => (
                                 <div key={i}>
                                     <div style={row}>
                                         <span style={{ ...xs, ...bold }}>{proj.name}</span>
@@ -228,9 +228,33 @@ const HarvardATSResume = ({ data, accentColor }) => {
                                             </span>
                                         )}
                                     </div>
+                                    {proj.tech_stack?.length > 0 && (
+                                        <p style={{ ...xs, margin: "2px 0 0" }}>
+                                            <strong>Tech Stack:</strong> {proj.tech_stack.join(", ")}
+                                        </p>
+                                    )}
                                     {proj.description && (
                                         <p style={{ ...xs, margin: "2px 0 0", lineHeight: "1.4" }}>
-                                            {proj.description}
+                                            {proj.description.split("\n").map((line, i) => (
+                                                <div key={i} style={{ display: "flex" }}>
+                                                    <span style={{ marginRight: "8px"}}>•</span>
+                                                    <span>{line}</span>
+                                                </div>
+                                            ))}
+                                        </p>
+                                    )}
+
+                                    {proj.link && (
+                                        <p style={{ ...xs, margin: "2px 0 0" }}>
+                                            <strong>Link:</strong>{" "}
+                                            <a
+                                                href={proj.link}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                style={{ color: "#1e40af", textDecoration: "underline" }}
+                                            >
+                                                {proj.link}
+                                            </a>
                                         </p>
                                     )}
                                 </div>
@@ -262,8 +286,13 @@ const HarvardATSResume = ({ data, accentColor }) => {
                                         )}
                                     </div>
                                     {exp.description && (
-                                        <p style={{ ...xs, margin: "2px 0 0", lineHeight: "1.4", whiteSpace: "pre-line" }}>
-                                            {exp.description}
+                                        <p style={{ ...xs, margin: "2px 0 0", lineHeight: "1.4" }}>
+                                            {exp.description.split("\n").map((line, i) => (
+                                                <div key={i} style={{ display: "flex" }}>
+                                                    <span style={{ marginRight: "8px"}}>•</span>
+                                                    <span>{line}</span>
+                                                </div>
+                                            ))}
                                         </p>
                                     )}
                                 </div>

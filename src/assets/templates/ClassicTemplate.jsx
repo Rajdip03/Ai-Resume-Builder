@@ -104,7 +104,25 @@ const ClassicTemplate = ({ data, accentColor }) => {
                             <div key={index} className="flex justify-between items-start border-l-3 border-gray-300 pl-6">
                                 <div>
                                     <li className="font-semibold text-gray-800 ">{proj.name}</li>
+                                    {proj.tech_stack?.length > 0 && (
+                                        <p>
+                                            <strong>Tech Stack:</strong> {proj.tech_stack.join(", ")}
+                                        </p>
+                                    )}
                                     <p className="text-gray-600">{proj.description}</p>
+                                    {proj.link && (
+                                        <p>
+                                            <strong>Link:</strong>{" "}
+                                            <a
+                                                href={proj.link}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="text-blue-600 underline"
+                                            >
+                                                {proj.link}
+                                            </a>
+                                        </p>
+                                    )}
                                 </div>
                             </div>
                         ))}
