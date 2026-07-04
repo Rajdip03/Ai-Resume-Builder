@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useParams, useNavigate } from 'react-router-dom'
+import toast, { Toaster } from 'react-hot-toast';
 import { dummyResumeData } from '../assets/assets';
-import { ArrowLeftIcon, Briefcase, ChevronLeft, ChevronRight, FileText, FolderIcon, GraduationCap, Sparkles, User } from 'lucide-react';
+import { ArrowLeftIcon, Briefcase, ChevronLeft, ChevronRight, FileText, FolderIcon, GraduationCap, Sparkles, User, Loader2 } from 'lucide-react';
 import PersonalInfoForm from '../components/PersonalInfoForm';
 import ResumePreview from '../components/ResumePreview';
 import TemplateSelector from '../components/TemplateSelector';
@@ -10,10 +11,13 @@ import ProfessionalSummaryForm from '../components/ProfessionalSummaryForm';
 import ExperienceForm from '../components/ExperienceForm';
 import EducationForm from '../components/EducationForm';
 import ProjectForm from '../components/ProjectForm';
+import SkillsForm from '../components/SkillsForm';
 
 const ResumeBuilder = () => {
 
   const { resumeId } = useParams()
+  const navigate = useNavigate()
+  const [isSaving, setIsSaving] = useState(false)
 
   const [resumeData, setResumeData] = useState({
     _id: '',
@@ -30,11 +34,82 @@ const ResumeBuilder = () => {
   })
 
   const loadExistingResume = async () => {
-    const resume = dummyResumeData.find((resume) => resume._id === resumeId);
+    let resume = null;
+
+    if (resumeId && resumeId !== 'new') {
+      const savedResumes = JSON.parse(localStorage.getItem('saved_resumes') || '[]');
+      resume = savedResumes.find((r) => r._id === resumeId);
+
+      if (!resume) {
+        resume = dummyResumeData.find((r) => r._id === resumeId);
+      }
+    }
 
     if (resume) {
       setResumeData(resume);
-      document.title = resume.title
+      document.title = resume.title || "Resume Builder";
+    } else {
+      document.title = "New Resume - Resume Builder";
+    }
+  }
+
+  const validateResumeData = () => {
+    const { personal_info } = resumeData;
+    
+    if (!personal_info?.full_name?.trim()) return "Full Name is required in Personal Info.";
+    if (!personal_info?.email?.trim()) return "Email is required in Personal Info.";
+    if (!personal_info?.phone?.trim()) return "Phone Number is required in Personal Info.";
+    if (!personal_info?.location?.trim()) return "Location is required in Personal Info.";
+    if (!personal_info?.profession?.trim()) return "Profession is required in Personal Info.";
+    
+    return null;
+  }
+
+  const handleSave = async () => {
+    const errorMsg = validateResumeData();
+    if (errorMsg) {
+      toast.error(errorMsg);
+      setActiveSectionIndex(0); // Jump to personal info if error is there
+      return;
+    }
+
+    setIsSaving(true);
+    
+    try {
+      await new Promise(resolve => setTimeout(resolve, 600));
+
+      const savedResumes = JSON.parse(localStorage.getItem('saved_resumes') || '[]');
+      
+      let updatedData = { ...resumeData };
+      let isNew = false;
+      
+      if (!updatedData._id || updatedData._id === 'new') {
+        updatedData._id = Date.now().toString();
+        if (!updatedData.title) updatedData.title = `Resume - ${updatedData.personal_info.full_name}`;
+        
+        savedResumes.push(updatedData);
+        isNew = true;
+      } else {
+        const index = savedResumes.findIndex(r => r._id === updatedData._id);
+        if (index >= 0) {
+          savedResumes[index] = updatedData;
+        } else {
+          savedResumes.push(updatedData);
+        }
+      }
+      
+      localStorage.setItem('saved_resumes', JSON.stringify(savedResumes));
+      setResumeData(updatedData);
+      toast.success("Resume saved successfully!");
+      
+      if (isNew) {
+         navigate(`/app/builder/${updatedData._id}`, { replace: true });
+      }
+    } catch (error) {
+       console.error("Failed to save:", error);
+       toast.error("An error occurred while saving.");
+    } finally {
+       setIsSaving(false);
     }
   }
 
@@ -58,6 +133,7 @@ const ResumeBuilder = () => {
 
   return (
     <div>
+      <Toaster position="top-right" />
       <div className="max-w-7xl mx-auto px-4 py-6">
         <Link to={"/app"} className="inline-flex items-center gap-2 text-slate-500 hover:text-slate-700 transition-all">
           <ArrowLeftIcon className="size-4" />
@@ -111,7 +187,23 @@ const ResumeBuilder = () => {
                 {activeSection.id === "project" && (
                   <ProjectForm data={resumeData.project} onChange={(data) => setResumeData(prev => ({ ...prev, project: data }))} />
                 )}
+                {activeSection.id === "skills" && (
+                  <SkillsForm data={resumeData.skills} onChange={(data) => setResumeData(prev => ({ ...prev, skills: data }))} />
+                )}
               </div>
+              <button 
+                onClick={handleSave} 
+                disabled={isSaving}
+                className='w-40 mt-6 flex items-center justify-center gap-2 px-4 py-2 bg-green-500 text-white font-medium rounded-lg hover:bg-green-600 transition-colors disabled:opacity-70 disabled:cursor-not-allowed'
+              >
+                {isSaving ? (
+                  <>
+                    <Loader2 className="size-4 animate-spin" /> Saving...
+                  </>
+                ) : (
+                  "Save Changes"
+                )}
+              </button>
             </div>
           </div>
           {/*Right panel preview */}
