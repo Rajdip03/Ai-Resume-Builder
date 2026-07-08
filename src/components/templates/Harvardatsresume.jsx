@@ -69,7 +69,7 @@ const HarvardATSResume = ({ data, accentColor }) => {
     // ── Styles (applied via style tag so @media print works) ─────────────────
     const pageStyle = `
         @media print {
-            @page { size: A4; margin: 10mm 18mm; }
+            @page { size: A4; margin: 8mm 15mm; }
             body * { visibility: hidden; }
             .harvard-resume, .harvard-resume * { visibility: visible; }
             .harvard-resume { position: absolute; left: 0; top: 0; box-shadow: none !important; }
@@ -87,7 +87,7 @@ const HarvardATSResume = ({ data, accentColor }) => {
                 textAlign: "center",
                 borderBottom: "1px solid #111",
                 paddingBottom: "1px",
-                marginBottom: "4px",
+                marginBottom: "2px",
                 marginTop: "0",
                 letterSpacing: "0.02em",
                 color: "#111",
@@ -100,12 +100,12 @@ const HarvardATSResume = ({ data, accentColor }) => {
     const baseStyle = {
         fontFamily: "'Times New Roman', Times, serif",
         fontSize: "10.5pt",
-        lineHeight: "1.35",
+        lineHeight: "1.3",
         color: "#111",
         background: "#fff",
     };
 
-    const xs = { fontSize: "9.5pt" };
+    const xs = { fontSize: "9.9pt" };
     const bold = { fontWeight: "bold" };
     const upperBold = { fontWeight: "bold", textTransform: "uppercase", letterSpacing: "0.03em" };
     const italic = { fontStyle: "italic" };
@@ -121,13 +121,13 @@ const HarvardATSResume = ({ data, accentColor }) => {
                     ...baseStyle,
                     maxWidth: "210mm",
                     margin: "0 auto",
-                    padding: "10mm 18mm",
+                    padding: "8mm 15mm",
                     background: "#fff",
                     boxSizing: "border-box",
                 }}
             >
                 {/* ── Header ───────────────────────────────────────────────────── */}
-                <header style={{ textAlign: "center", marginBottom: "25px" }}>
+                <header style={{ textAlign: "center", marginBottom: "12px" }}>
                     {data.personal_info?.category && (
                         <p style={{ ...xs, fontStyle: "italic", textAlign: "right", marginBottom: "2px" }}>
                             {data.personal_info.category}
@@ -150,7 +150,7 @@ const HarvardATSResume = ({ data, accentColor }) => {
 
                 {/* ── Professional Summary ────────────────────────────────────────── */}
                 {data.professional_summary && (
-                    <section style={{ marginBottom: "8px" }}>
+                    <section style={{ marginBottom: "6px" }}>
                         <SectionHeading>Professional Summary</SectionHeading>
                         <p style={{ ...xs, margin: "2px 0 0", lineHeight: "1.4" }}>
                             {data.professional_summary}
@@ -196,7 +196,7 @@ const HarvardATSResume = ({ data, accentColor }) => {
                 )}
                 {/* ── Projects ─────────────────────────────────────────────────── */}
                 {(data.project || data.projects) && (data.project || data.projects).length > 0 && (
-                    <section style={{ marginBottom: "8px" }}>
+                    <section style={{ marginBottom: "6px" }}>
                         <SectionHeading>Projects</SectionHeading>
                         <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
                             {(data.project || data.projects).map((proj, i) => (
@@ -214,12 +214,12 @@ const HarvardATSResume = ({ data, accentColor }) => {
                                         )}
                                     </div>
                                     {proj.tech_stack?.length > 0 && (
-                                        <p style={{ ...xs, margin: "2px 0 0" }}>
+                                        <p style={{ ...xs, margin: "1px 0 0" }}>
                                             <strong>Tech Stack:</strong> {proj.tech_stack.join(", ")}
                                         </p>
                                     )}
                                     {proj.description && (
-                                        <p style={{ ...xs, margin: "2px 0 0", lineHeight: "1.4" }}>
+                                        <p style={{ ...xs, margin: "1px 0 0", lineHeight: "1.25" }}>
                                             {proj.description.split("\n").map((line, i) => (
                                                 <div key={i} style={{ display: "flex" }}>
                                                     <span style={{ marginRight: "8px" }}>•</span>
@@ -230,7 +230,7 @@ const HarvardATSResume = ({ data, accentColor }) => {
                                     )}
 
                                     {proj.link && (
-                                        <p style={{ ...xs, margin: "2px 0 0" }}>
+                                        <p style={{ ...xs, margin: "1px 0 0" }}>
                                             <strong>Link:</strong>{" "}
                                             <a
                                                 href={proj.link}
@@ -249,7 +249,7 @@ const HarvardATSResume = ({ data, accentColor }) => {
                 )}
                 {/* ── Technical Skills ─────────────────────────────────────────── */}
                 {flatSkills.length > 0 && (
-                    <section style={{ marginBottom: "8px" }}>
+                    <section style={{ marginBottom: "6px" }}>
                         <SectionHeading>Technical Skills</SectionHeading>
                         <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
                             {SKILL_CATS.map((cat) =>
@@ -265,7 +265,7 @@ const HarvardATSResume = ({ data, accentColor }) => {
                 )}
                 {/* ── Education ────────────────────────────────────────────────── */}
                 {data.education && data.education.length > 0 && (
-                    <section style={{ marginBottom: "8px" }}>
+                    <section style={{ marginBottom: "6px" }}>
                         <SectionHeading>Education</SectionHeading>
                         <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
                             {data.education.map((edu, i) => (
@@ -287,12 +287,12 @@ const HarvardATSResume = ({ data, accentColor }) => {
                                         )}
                                     </div>
                                     {edu.coursework && (
-                                        <p style={{ ...xs, margin: "2px 0 0" }}>
+                                        <p style={{ ...xs, margin: "1px 0 0" }}>
                                             <strong>Relevant Coursework:</strong> {edu.coursework}
                                         </p>
                                     )}
                                     {edu.notes && (
-                                        <p style={{ ...xs, margin: "2px 0 0" }}>{edu.notes}</p>
+                                        <p style={{ ...xs, margin: "1px 0 0" }}>{edu.notes}</p>
                                     )}
                                 </div>
                             ))}
