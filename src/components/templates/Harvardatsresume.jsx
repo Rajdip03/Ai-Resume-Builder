@@ -69,8 +69,10 @@ const HarvardATSResume = ({ data, accentColor }) => {
     // ── Styles (applied via style tag so @media print works) ─────────────────
     const pageStyle = `
         @media print {
-            @page { size: A4; margin: 16mm 18mm; }
-            .harvard-resume { padding: 0 !important; max-width: 100% !important; box-shadow: none !important; }
+            @page { size: A4; margin: 10mm 18mm; }
+            body * { visibility: hidden; }
+            .harvard-resume, .harvard-resume * { visibility: visible; }
+            .harvard-resume { position: absolute; left: 0; top: 0; box-shadow: none !important; }
             .harvard-resume * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
         }
     `;
@@ -84,8 +86,8 @@ const HarvardATSResume = ({ data, accentColor }) => {
                 fontWeight: "bold",
                 textAlign: "center",
                 borderBottom: "1px solid #111",
-                paddingBottom: "2px",
-                marginBottom: "6px",
+                paddingBottom: "1px",
+                marginBottom: "4px",
                 marginTop: "0",
                 letterSpacing: "0.02em",
                 color: "#111",
@@ -97,13 +99,13 @@ const HarvardATSResume = ({ data, accentColor }) => {
 
     const baseStyle = {
         fontFamily: "'Times New Roman', Times, serif",
-        fontSize: "11pt",
-        lineHeight: "1.45",
+        fontSize: "10.5pt",
+        lineHeight: "1.35",
         color: "#111",
         background: "#fff",
     };
 
-    const xs = { fontSize: "10pt" };
+    const xs = { fontSize: "9.5pt" };
     const bold = { fontWeight: "bold" };
     const upperBold = { fontWeight: "bold", textTransform: "uppercase", letterSpacing: "0.03em" };
     const italic = { fontStyle: "italic" };
@@ -119,7 +121,7 @@ const HarvardATSResume = ({ data, accentColor }) => {
                     ...baseStyle,
                     maxWidth: "210mm",
                     margin: "0 auto",
-                    padding: "16mm 18mm",
+                    padding: "10mm 18mm",
                     background: "#fff",
                     boxSizing: "border-box",
                 }}
@@ -148,18 +150,124 @@ const HarvardATSResume = ({ data, accentColor }) => {
 
                 {/* ── Professional Summary ────────────────────────────────────────── */}
                 {data.professional_summary && (
-                    <section style={{ marginBottom: "12px" }}>
+                    <section style={{ marginBottom: "8px" }}>
                         <SectionHeading>Professional Summary</SectionHeading>
                         <p style={{ ...xs, margin: "2px 0 0", lineHeight: "1.4" }}>
                             {data.professional_summary}
                         </p>
                     </section>
                 )}
+                {/* ── Experience ──────────────────────────────────────── */}
+                {data.experience && data.experience.length > 0 && (
+                    <section style={{ marginBottom: "8px" }}>
+                        <SectionHeading> Experience</SectionHeading>
+                        <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+                            {data.experience.map((exp, i) => (
+                                <div key={i}>
+                                    <div style={row}>
+                                        <span style={{ ...xs, ...upperBold }}>{exp.company}</span>
+                                        {exp.location && (
+                                            <span style={{ ...xs, ...noWrap }}>{exp.location}</span>
+                                        )}
+                                    </div>
+                                    <div style={row}>
+                                        <span style={{ ...xs, ...bold, ...italic }}>{exp.position}</span>
+                                        {exp.start_date && (
+                                            <span style={{ ...xs, ...noWrap }}>
+                                                {formatDate(exp.start_date)} –{" "}
+                                                {exp.is_current ? "Present" : formatDate(exp.end_date)}
+                                            </span>
+                                        )}
+                                    </div>
+                                    {exp.description && (
+                                        <p style={{ ...xs, margin: "2px 0 0", lineHeight: "1.4" }}>
+                                            {exp.description.split("\n").map((line, i) => (
+                                                <div key={i} style={{ display: "flex" }}>
+                                                    <span style={{ marginRight: "8px" }}>•</span>
+                                                    <span>{line}</span>
+                                                </div>
+                                            ))}
+                                        </p>
+                                    )}
+                                </div>
+                            ))}
+                        </div>
+                    </section>
+                )}
+                {/* ── Projects ─────────────────────────────────────────────────── */}
+                {(data.project || data.projects) && (data.project || data.projects).length > 0 && (
+                    <section style={{ marginBottom: "8px" }}>
+                        <SectionHeading>Projects</SectionHeading>
+                        <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+                            {(data.project || data.projects).map((proj, i) => (
+                                <div key={i}>
+                                    <div style={row}>
+                                        <span style={{ ...xs, ...bold }}>{proj.name}</span>
+                                        {(proj.start_date || proj.end_date) && (
+                                            <span style={{ ...xs, ...noWrap }}>
+                                                {proj.start_date && proj.end_date
+                                                    ? `${formatDate(proj.start_date)} – ${formatDate(proj.end_date)}`
+                                                    : proj.start_date
+                                                        ? formatDate(proj.start_date)
+                                                        : formatDate(proj.end_date)}
+                                            </span>
+                                        )}
+                                    </div>
+                                    {proj.tech_stack?.length > 0 && (
+                                        <p style={{ ...xs, margin: "2px 0 0" }}>
+                                            <strong>Tech Stack:</strong> {proj.tech_stack.join(", ")}
+                                        </p>
+                                    )}
+                                    {proj.description && (
+                                        <p style={{ ...xs, margin: "2px 0 0", lineHeight: "1.4" }}>
+                                            {proj.description.split("\n").map((line, i) => (
+                                                <div key={i} style={{ display: "flex" }}>
+                                                    <span style={{ marginRight: "8px" }}>•</span>
+                                                    <span>{line}</span>
+                                                </div>
+                                            ))}
+                                        </p>
+                                    )}
+
+                                    {proj.link && (
+                                        <p style={{ ...xs, margin: "2px 0 0" }}>
+                                            <strong>Link:</strong>{" "}
+                                            <a
+                                                href={proj.link}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                style={{ color: "#1e40af", textDecoration: "underline" }}
+                                            >
+                                                {proj.link}
+                                            </a>
+                                        </p>
+                                    )}
+                                </div>
+                            ))}
+                        </div>
+                    </section>
+                )}
+                {/* ── Technical Skills ─────────────────────────────────────────── */}
+                {flatSkills.length > 0 && (
+                    <section style={{ marginBottom: "8px" }}>
+                        <SectionHeading>Technical Skills</SectionHeading>
+                        <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
+                            {SKILL_CATS.map((cat) =>
+                                categorized[cat.key] && categorized[cat.key].length > 0 ? (
+                                    <p key={cat.key} style={{ ...xs, margin: 0 }}>
+                                        <strong>{cat.label}:</strong>{" "}
+                                        {categorized[cat.key].join(", ")}
+                                    </p>
+                                ) : null
+                            )}
+                        </div>
+                    </section>
+                )}
                 {/* ── Education ────────────────────────────────────────────────── */}
                 {data.education && data.education.length > 0 && (
-                    <section style={{ marginBottom: "12px" }}>
+                    <section style={{ marginBottom: "8px" }}>
                         <SectionHeading>Education</SectionHeading>
-                        <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+                        <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
                             {data.education.map((edu, i) => (
                                 <div key={i}>
                                     <div style={row}>
@@ -185,115 +293,6 @@ const HarvardATSResume = ({ data, accentColor }) => {
                                     )}
                                     {edu.notes && (
                                         <p style={{ ...xs, margin: "2px 0 0" }}>{edu.notes}</p>
-                                    )}
-                                </div>
-                            ))}
-                        </div>
-                    </section>
-                )}
-
-                {/* ── Technical Skills ─────────────────────────────────────────── */}
-                {flatSkills.length > 0 && (
-                    <section style={{ marginBottom: "12px" }}>
-                        <SectionHeading>Technical Skills</SectionHeading>
-                        <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
-                            {SKILL_CATS.map((cat) =>
-                                categorized[cat.key] && categorized[cat.key].length > 0 ? (
-                                    <p key={cat.key} style={{ ...xs, margin: 0 }}>
-                                        <strong>{cat.label}:</strong>{" "}
-                                        {categorized[cat.key].join(", ")}
-                                    </p>
-                                ) : null
-                            )}
-                        </div>
-                    </section>
-                )}
-
-                {/* ── Projects ─────────────────────────────────────────────────── */}
-                {(data.project || data.projects) && (data.project || data.projects).length > 0 && (
-                    <section style={{ marginBottom: "12px" }}>
-                        <SectionHeading>Projects</SectionHeading>
-                        <div style={{ display: "flex", flexDirection: "column", gap: "7px" }}>
-                            {(data.project || data.projects).map((proj, i) => (
-                                <div key={i}>
-                                    <div style={row}>
-                                        <span style={{ ...xs, ...bold }}>{proj.name}</span>
-                                        {(proj.start_date || proj.end_date) && (
-                                            <span style={{ ...xs, ...noWrap }}>
-                                                {proj.start_date && proj.end_date
-                                                    ? `${formatDate(proj.start_date)} – ${formatDate(proj.end_date)}`
-                                                    : proj.start_date
-                                                        ? formatDate(proj.start_date)
-                                                        : formatDate(proj.end_date)}
-                                            </span>
-                                        )}
-                                    </div>
-                                    {proj.tech_stack?.length > 0 && (
-                                        <p style={{ ...xs, margin: "2px 0 0" }}>
-                                            <strong>Tech Stack:</strong> {proj.tech_stack.join(", ")}
-                                        </p>
-                                    )}
-                                    {proj.description && (
-                                        <p style={{ ...xs, margin: "2px 0 0", lineHeight: "1.4" }}>
-                                            {proj.description.split("\n").map((line, i) => (
-                                                <div key={i} style={{ display: "flex" }}>
-                                                    <span style={{ marginRight: "8px"}}>•</span>
-                                                    <span>{line}</span>
-                                                </div>
-                                            ))}
-                                        </p>
-                                    )}
-
-                                    {proj.link && (
-                                        <p style={{ ...xs, margin: "2px 0 0" }}>
-                                            <strong>Link:</strong>{" "}
-                                            <a
-                                                href={proj.link}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                style={{ color: "#1e40af", textDecoration: "underline" }}
-                                            >
-                                                {proj.link}
-                                            </a>
-                                        </p>
-                                    )}
-                                </div>
-                            ))}
-                        </div>
-                    </section>
-                )}
-
-                {/* ── Experience ──────────────────────────────────────── */}
-                {data.experience && data.experience.length > 0 && (
-                    <section style={{ marginBottom: "12px" }}>
-                        <SectionHeading> Experience</SectionHeading>
-                        <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-                            {data.experience.map((exp, i) => (
-                                <div key={i}>
-                                    <div style={row}>
-                                        <span style={{ ...xs, ...upperBold }}>{exp.company}</span>
-                                        {exp.location && (
-                                            <span style={{ ...xs, ...noWrap }}>{exp.location}</span>
-                                        )}
-                                    </div>
-                                    <div style={row}>
-                                        <span style={{ ...xs, ...bold, ...italic }}>{exp.position}</span>
-                                        {exp.start_date && (
-                                            <span style={{ ...xs, ...noWrap }}>
-                                                {formatDate(exp.start_date)} –{" "}
-                                                {exp.is_current ? "Present" : formatDate(exp.end_date)}
-                                            </span>
-                                        )}
-                                    </div>
-                                    {exp.description && (
-                                        <p style={{ ...xs, margin: "2px 0 0", lineHeight: "1.4" }}>
-                                            {exp.description.split("\n").map((line, i) => (
-                                                <div key={i} style={{ display: "flex" }}>
-                                                    <span style={{ marginRight: "8px"}}>•</span>
-                                                    <span>{line}</span>
-                                                </div>
-                                            ))}
-                                        </p>
                                     )}
                                 </div>
                             ))}

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link, useParams, useNavigate } from 'react-router-dom'
 import toast, { Toaster } from 'react-hot-toast';
 import { dummyResumeData } from '../assets/assets';
-import { ArrowLeftIcon, Briefcase, ChevronLeft, ChevronRight, FileText, FolderIcon, GraduationCap, Sparkles, User, Loader2 } from 'lucide-react';
+import { ArrowLeftIcon, Briefcase, ChevronLeft, ChevronRight, FileText, FolderIcon, GraduationCap, Sparkles, User, Loader2, Share2Icon, EyeIcon, EyeOffIcon, DownloadIcon } from 'lucide-react';
 import PersonalInfoForm from '../components/PersonalInfoForm';
 import ResumePreview from '../components/ResumePreview';
 import TemplateSelector from '../components/TemplateSelector';
@@ -55,13 +55,13 @@ const ResumeBuilder = () => {
 
   const validateResumeData = () => {
     const { personal_info } = resumeData;
-    
+
     if (!personal_info?.full_name?.trim()) return "Full Name is required in Personal Info.";
     if (!personal_info?.email?.trim()) return "Email is required in Personal Info.";
     if (!personal_info?.phone?.trim()) return "Phone Number is required in Personal Info.";
     if (!personal_info?.location?.trim()) return "Location is required in Personal Info.";
     if (!personal_info?.profession?.trim()) return "Profession is required in Personal Info.";
-    
+
     return null;
   }
 
@@ -74,19 +74,19 @@ const ResumeBuilder = () => {
     }
 
     setIsSaving(true);
-    
+
     try {
       await new Promise(resolve => setTimeout(resolve, 600));
 
       const savedResumes = JSON.parse(localStorage.getItem('saved_resumes') || '[]');
-      
+
       let updatedData = { ...resumeData };
       let isNew = false;
-      
+
       if (!updatedData._id || updatedData._id === 'new') {
         updatedData._id = Date.now().toString();
         if (!updatedData.title) updatedData.title = `Resume - ${updatedData.personal_info.full_name}`;
-        
+
         savedResumes.push(updatedData);
         isNew = true;
       } else {
@@ -97,19 +97,19 @@ const ResumeBuilder = () => {
           savedResumes.push(updatedData);
         }
       }
-      
+
       localStorage.setItem('saved_resumes', JSON.stringify(savedResumes));
       setResumeData(updatedData);
       toast.success("Resume saved successfully!");
-      
+
       if (isNew) {
-         navigate(`/app/builder/${updatedData._id}`, { replace: true });
+        navigate(`/app/builder/${updatedData._id}`, { replace: true });
       }
     } catch (error) {
-       console.error("Failed to save:", error);
-       toast.error("An error occurred while saving.");
+      console.error("Failed to save:", error);
+      toast.error("An error occurred while saving.");
     } finally {
-       setIsSaving(false);
+      setIsSaving(false);
     }
   }
 
@@ -131,6 +131,21 @@ const ResumeBuilder = () => {
     loadExistingResume()
   }, [])
 
+  const changeResumeVisibility = async () => {
+    setResumeData({ ...resumeData, public: !resumeData.public })
+  }
+  const handleShare = () => {
+    const frontendUrl = window.location.href.split('/app/')[0];
+    const resumeUrl = `${frontendUrl}/view/${resumeData._id}`;
+    if(navigator.share){
+      navigator.share({url:resumeUrl, text: "My Resume",})
+    }else{
+      alert("share not supported on this browser");
+    }
+  }
+  const downloadResume= ()=>{
+    window.print();
+  }
   return (
     <div>
       <Toaster position="top-right" />
@@ -191,8 +206,8 @@ const ResumeBuilder = () => {
                   <SkillsForm data={resumeData.skills} onChange={(data) => setResumeData(prev => ({ ...prev, skills: data }))} />
                 )}
               </div>
-              <button 
-                onClick={handleSave} 
+              <button
+                onClick={handleSave}
                 disabled={isSaving}
                 className='w-40 mt-6 flex items-center justify-center gap-2 px-4 py-2 bg-green-500 text-white font-medium rounded-lg hover:bg-green-600 transition-colors disabled:opacity-70 disabled:cursor-not-allowed'
               >
@@ -208,8 +223,22 @@ const ResumeBuilder = () => {
           </div>
           {/*Right panel preview */}
           <div className='lg:col-span-7 max-lg:mt-6'>
-            <div>
-              {/* ---buttons--- */}
+            <div className='relative w-full'>
+              <div className='absolute bottom-3 left-0 right-0 flex item-center justify-end gap-2'>
+                {resumeData.public && (
+                  <button onClick={handleShare} className='flex items-center p-2 px-4 gap-2 text-xs bg-gradient-to-br from-blue-100 to-blue-200 text-blue-600 rounded-lg ring-blue-300 hover:ring transition-colors'>
+                    <Share2Icon className='size-4' />
+                  </button>
+                )}
+                <button onClick={changeResumeVisibility} className='flex items-center p-2 px-4 gap-2 text-xs bg-gradient-to-br from-purple-100 to-purple-200 text-purple-600 rounded-lg ring-purple-300 hover:ring transition-colors'>
+                  {resumeData.public ? <EyeIcon className='size-4' /> :
+                    <EyeOffIcon className='size-4' />}
+                  {resumeData.public ? 'Public' : 'Private'}
+                </button>
+                <button onClick={downloadResume} className='flex items-center p-2 px-4 gap-2 text-xs bg-gradient-to-br from-green-100 to-green-200 text-green-600 rounded-lg ring-green-300 hover:ring transition-colors'>
+                  <DownloadIcon className='size-4' /> Download
+                </button>
+              </div>
             </div>
             <ResumePreview data={resumeData} template={resumeData.template} accentColor={resumeData.accent_color} />
           </div>
