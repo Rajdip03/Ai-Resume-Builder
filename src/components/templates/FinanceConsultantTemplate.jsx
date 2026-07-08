@@ -54,9 +54,12 @@ const FinanceConsultantTemplate = ({ data, accentColor }) => {
                                         <div key={i}>
                                             <div className="flex justify-between items-baseline">
                                                 <h3 className="font-bold text-sm text-gray-900">{exp.position}</h3>
-                                                <span className="text-xs text-gray-500" style={{ fontFamily: "'Arial', sans-serif" }}>
-                                                    {formatDate(exp.start_date)} – {exp.is_current ? "Present" : formatDate(exp.end_date)}
-                                                </span>
+                                                <div className="text-right">
+                                                    {exp.location && <span className="block text-[10px] text-gray-400 uppercase tracking-widest mb-1">{exp.location}</span>}
+                                                    <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest bg-gray-100 px-2 py-1 rounded-sm">
+                                                        {formatDate(exp.start_date)} – {exp.is_current ? "Present" : formatDate(exp.end_date)}
+                                                    </span>
+                                                </div>
                                             </div>
                                             <p className="text-xs font-semibold tracking-wide uppercase mt-0.5" style={{ color: accentColor }}>
                                                 {exp.company}
@@ -124,7 +127,10 @@ const FinanceConsultantTemplate = ({ data, accentColor }) => {
                                             <p className="font-bold text-gray-900">{edu.degree}</p>
                                             {edu.field && <p className="text-gray-600">{edu.field}</p>}
                                             <p className="text-gray-500">{edu.institution}</p>
-                                            <p className="text-gray-400">{formatDate(edu.graduation_date)}</p>
+                                            <p className="text-gray-400">
+                                                {edu.location && <span className="block mb-0.5">{edu.location}</span>}
+                                                {formatDate(edu.graduation_date)}
+                                            </p>
                                             {edu.gpa && <p className="text-gray-400">GPA: {edu.gpa}</p>}
                                         </div>
                                     ))}

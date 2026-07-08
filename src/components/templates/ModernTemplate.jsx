@@ -79,8 +79,11 @@ const ModernTemplate = ({ data, accentColor }) => {
 											<h3 className="text-xl font-medium text-gray-900">{exp.position}</h3>
 											<p className="font-medium" style={{ color: accentColor }}>{exp.company}</p>
 										</div>
-										<div className="text-sm text-gray-500 bg-gray-100 px-3 py-1 rounded">
-											{formatDate(exp.start_date)} - {exp.is_current ? "Present" : formatDate(exp.end_date)}
+										<div className="flex flex-col items-end">
+											{exp.location && <span className="text-sm text-gray-500 mb-1">{exp.location}</span>}
+											<div className="text-sm text-gray-500 bg-gray-100 px-3 py-1 rounded">
+												{formatDate(exp.start_date)} - {exp.is_current ? "Present" : formatDate(exp.end_date)}
+											</div>
 										</div>
 									</div>
 									{exp.description && (
@@ -147,9 +150,12 @@ const ModernTemplate = ({ data, accentColor }) => {
 											{edu.degree} {edu.field && `in ${edu.field}`}
 										</h3>
 										<p style={{ color: accentColor }}>{edu.institution}</p>
-										<div className="flex justify-between items-center text-sm text-gray-600">
-											<span>{formatDate(edu.graduation_date)}</span>
-											{edu.gpa && <span>GPA: {edu.gpa}</span>}
+										<div className="text-sm text-gray-600">
+											{edu.location && <div className="mb-0.5">{edu.location}</div>}
+											<div className="flex justify-between items-center">
+												<span>{formatDate(edu.graduation_date)}</span>
+												{edu.gpa && <span>GPA: {edu.gpa}</span>}
+											</div>
 										</div>
 									</div>
 								))}

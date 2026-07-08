@@ -76,7 +76,10 @@ const HybridTimelineTemplate = ({ data, accentColor }) => {
                                         <p className="font-bold text-gray-900">{edu.degree}</p>
                                         {edu.field && <p className="text-gray-600">{edu.field}</p>}
                                         <p className="text-gray-500">{edu.institution}</p>
-                                        <p className="text-gray-400">{formatDate(edu.graduation_date)}{edu.gpa ? ` · ${edu.gpa}` : ""}</p>
+                                        <p className="text-gray-400">
+                                            {edu.location && <span className="block mb-0.5">{edu.location}</span>}
+                                            {formatDate(edu.graduation_date)}{edu.gpa ? ` · ${edu.gpa}` : ""}
+                                        </p>
                                     </div>
                                 ))}
                             </div>
@@ -109,9 +112,12 @@ const HybridTimelineTemplate = ({ data, accentColor }) => {
                                             <div className="flex-1 pb-2">
                                                 <div className="flex justify-between items-baseline flex-wrap gap-1">
                                                     <h3 className="font-bold text-sm text-gray-900">{exp.position}</h3>
-                                                    <span className="text-xs text-gray-400">
-                                                        {formatDate(exp.start_date)} – {exp.is_current ? "Present" : formatDate(exp.end_date)}
-                                                    </span>
+                                                    <div className="flex flex-col items-end">
+                                                        {exp.location && <span className="text-xs text-gray-500 mb-0.5">{exp.location}</span>}
+                                                        <span className="text-xs text-gray-500 font-medium">
+                                                            {formatDate(exp.start_date)} – {exp.is_current ? "Present" : formatDate(exp.end_date)}
+                                                        </span>
+                                                    </div>
                                                 </div>
                                                 <p className="text-xs font-semibold text-gray-500 mt-0.5">{exp.company}</p>
                                                 {exp.description && (

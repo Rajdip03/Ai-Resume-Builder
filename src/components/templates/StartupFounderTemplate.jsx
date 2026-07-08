@@ -66,9 +66,12 @@ const StartupFounderTemplate = ({ data, accentColor }) => {
                                             <h3 className="font-black text-base text-gray-900">{exp.position}</h3>
                                             <p className="text-sm font-semibold" style={{ color: accentColor }}>{exp.company}</p>
                                         </div>
-                                        <span className="text-xs text-gray-400 bg-gray-50 px-2 py-1">
-                                            {formatDate(exp.start_date)} – {exp.is_current ? "Now" : formatDate(exp.end_date)}
-                                        </span>
+                                        <div className="flex flex-col items-end">
+                                            {exp.location && <span className="text-xs text-gray-400 mb-0.5">{exp.location}</span>}
+                                            <span className="text-xs text-gray-400 bg-gray-50 px-2 py-1">
+                                                {formatDate(exp.start_date)} – {exp.is_current ? "Now" : formatDate(exp.end_date)}
+                                            </span>
+                                        </div>
                                     </div>
                                     {exp.description && (
                                         <p className="text-sm text-gray-600 mt-2 leading-relaxed whitespace-pre-line">{exp.description}</p>
@@ -113,7 +116,10 @@ const StartupFounderTemplate = ({ data, accentColor }) => {
                                     <span className="text-gray-400 mx-2">·</span>
                                     <span className="text-gray-600">{edu.institution}</span>
                                     <span className="text-gray-400 mx-2">·</span>
-                                    <span className="text-gray-400">{formatDate(edu.graduation_date)}</span>
+                                    <span className="text-gray-400 inline-flex flex-col items-center align-middle relative -top-1">
+                                        {edu.location && <span className="text-[10px] leading-none mb-0.5">{edu.location}</span>}
+                                        <span>{formatDate(edu.graduation_date)}</span>
+                                    </span>
                                     {edu.gpa && <span className="text-gray-400 ml-2">· GPA {edu.gpa}</span>}
                                 </div>
                             ))}

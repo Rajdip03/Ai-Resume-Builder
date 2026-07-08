@@ -59,6 +59,7 @@ const ExecutiveBoardroomTemplate = ({ data, accentColor }) => {
                                 <div key={i} className="grid grid-cols-4 gap-4">
                                     <div className="col-span-1 text-right pt-0.5">
                                         <p className="text-xs text-gray-500" style={{ fontFamily: "'Arial', sans-serif" }}>
+                                            {exp.location && <span className="block mb-1">{exp.location}</span>}
                                             {formatDate(exp.start_date)} –<br />{exp.is_current ? "Present" : formatDate(exp.end_date)}
                                         </p>
                                         <p className="text-xs font-semibold text-gray-700 mt-1">{exp.company}</p>
@@ -114,7 +115,10 @@ const ExecutiveBoardroomTemplate = ({ data, accentColor }) => {
                                     <div key={i}>
                                         <p className="font-bold text-sm text-gray-900">{edu.degree}{edu.field ? `, ${edu.field}` : ""}</p>
                                         <p className="text-xs text-gray-600" style={{ fontFamily: "'Arial', sans-serif" }}>{edu.institution}</p>
-                                        <p className="text-xs text-gray-400">{formatDate(edu.graduation_date)}{edu.gpa ? ` · GPA ${edu.gpa}` : ""}</p>
+                                        <p className="text-xs text-gray-400">
+                                            {edu.location && <span className="block mb-0.5">{edu.location}</span>}
+                                            {formatDate(edu.graduation_date)}{edu.gpa ? ` · GPA ${edu.gpa}` : ""}
+                                        </p>
                                     </div>
                                 ))}
                             </div>

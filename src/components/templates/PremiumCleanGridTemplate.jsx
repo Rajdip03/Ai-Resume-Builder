@@ -59,6 +59,7 @@ const PremiumCleanGridTemplate = ({ data, accentColor }) => {
                             {data.experience.map((exp, i) => (
                                 <div key={i} className="grid grid-cols-5 gap-6">
                                     <div className="col-span-1 text-xs text-gray-400 pt-0.5 leading-relaxed">
+                                        {exp.location && <p className="mb-1">{exp.location}</p>}
                                         <p>{formatDate(exp.start_date)}</p>
                                         <p>– {exp.is_current ? "Present" : formatDate(exp.end_date)}</p>
                                         <p className="mt-1 font-medium text-gray-500">{exp.company}</p>
@@ -117,6 +118,7 @@ const PremiumCleanGridTemplate = ({ data, accentColor }) => {
                                     <div key={i} className="text-xs">
                                         <p className="font-bold text-gray-900">{edu.degree}{edu.field ? ` in ${edu.field}` : ""}</p>
                                         <p className="text-gray-500">{edu.institution}</p>
+                                        {edu.location && <p className="text-gray-400 mb-0.5">{edu.location}</p>}
                                         <p className="text-gray-400">{formatDate(edu.graduation_date)}{edu.gpa ? ` · GPA ${edu.gpa}` : ""}</p>
                                     </div>
                                 ))}

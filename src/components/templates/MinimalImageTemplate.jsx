@@ -81,6 +81,7 @@ const MinimalImageTemplate = ({ data, accentColor }) => {
                                     <div key={index}>
                                         <p className="font-semibold uppercase">{edu.degree}</p>
                                         <p className="text-zinc-600">{edu.institution}</p>
+                                        {edu.location && <p className="text-xs text-zinc-500 mb-0.5">{edu.location}</p>}
                                         <p className="text-xs text-zinc-500">
                                             {formatDate(edu.graduation_date)}
                                         </p>
@@ -133,10 +134,13 @@ const MinimalImageTemplate = ({ data, accentColor }) => {
                                             <h3 className="font-semibold text-zinc-900">
                                                 {exp.position}
                                             </h3>
-                                            <span className="text-xs text-zinc-500">
-                                                {formatDate(exp.start_date)} -{" "}
-                                                {exp.is_current ? "Present" : formatDate(exp.end_date)}
-                                            </span>
+                                            <div className="flex flex-col items-end">
+                                                {exp.location && <span className="text-sm text-zinc-500 mb-0.5">{exp.location}</span>}
+                                                <span className="text-sm text-zinc-500">
+                                                    {formatDate(exp.start_date)} -{" "}
+                                                    {exp.is_current ? "Present" : formatDate(exp.end_date)}
+                                                </span>
+                                            </div>
                                         </div>
                                         <p className="text-sm mb-2" style={{ color: accentColor }} >
                                             {exp.company}

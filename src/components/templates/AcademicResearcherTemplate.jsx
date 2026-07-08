@@ -51,7 +51,10 @@ const AcademicResearcherTemplate = ({ data, accentColor }) => {
                         <div className="space-y-4">
                             {data.education.map((edu, i) => (
                                 <div key={i} className="grid grid-cols-4 gap-4 text-sm" style={{ fontFamily: "'Arial', sans-serif" }}>
-                                    <div className="col-span-1 text-right text-gray-500 pt-0.5">{formatDate(edu.graduation_date)}</div>
+                                    <div className="col-span-1 text-right text-gray-500 pt-0.5">
+                                        {edu.location && <div className="mb-1">{edu.location}</div>}
+                                        {formatDate(edu.graduation_date)}
+                                    </div>
                                     <div className="col-span-3">
                                         <p className="font-semibold text-gray-900">{edu.degree}{edu.field ? ` in ${edu.field}` : ""}</p>
                                         <p className="text-gray-600">{edu.institution}</p>
@@ -71,6 +74,7 @@ const AcademicResearcherTemplate = ({ data, accentColor }) => {
                             {data.experience.map((exp, i) => (
                                 <div key={i} className="grid grid-cols-4 gap-4 text-sm" style={{ fontFamily: "'Arial', sans-serif" }}>
                                     <div className="col-span-1 text-right text-gray-500 pt-0.5">
+                                        {exp.location && <div className="mb-1">{exp.location}</div>}
                                         {formatDate(exp.start_date)} –<br />{exp.is_current ? "Present" : formatDate(exp.end_date)}
                                     </div>
                                     <div className="col-span-3">
