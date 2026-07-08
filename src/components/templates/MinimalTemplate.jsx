@@ -51,9 +51,12 @@ const MinimalTemplate = ({ data, accentColor }) => {
                             <div key={index}>
                                 <div className="flex justify-between items-baseline mb-1">
                                     <h3 className="text-lg font-medium">{exp.position}</h3>
-                                    <span className="text-sm text-gray-500">
-                                        {formatDate(exp.start_date)} - {exp.is_current ? "Present" : formatDate(exp.end_date)}
-                                    </span>
+                                    <div className="flex flex-col items-end whitespace-nowrap ml-4">
+                                        {exp.location && <span className="text-gray-500 text-sm mb-0.5">{exp.location}</span>}
+                                        <span className="text-gray-500 text-sm">
+                                            {formatDate(exp.start_date)} - {exp.is_current ? "Present" : formatDate(exp.end_date)}
+                                        </span>
+                                    </div>
                                 </div>
                                 <p className="text-gray-600 mb-2">{exp.company}</p>
                                 {exp.description && (
@@ -112,9 +115,12 @@ const MinimalTemplate = ({ data, accentColor }) => {
                                     <p className="text-gray-600">{edu.institution}</p>
                                     {edu.gpa && <p className="text-sm text-gray-500">GPA: {edu.gpa}</p>}
                                 </div>
-                                <span className="text-sm text-gray-500">
-                                    {formatDate(edu.graduation_date)}
-                                </span>
+                                <div className="flex flex-col items-end">
+                                    {edu.location && <span className="text-sm text-gray-500 mb-0.5">{edu.location}</span>}
+                                    <span className="text-sm text-gray-500">
+                                        {formatDate(edu.graduation_date)}
+                                    </span>
+                                </div>
                             </div>
                         ))}
                     </div>

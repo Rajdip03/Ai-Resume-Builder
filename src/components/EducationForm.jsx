@@ -54,8 +54,8 @@ const updateEducation = (index,field,value) => {
                         <div className='grid md:grid-cols-2 gap-3'>
                             <input type="text" placeholder='Institution' value={education.institution || ""} onChange={(e)=> updateEducation(index,"institution",e.target.value)} className='w-full p-2 border border-gray-300 rounded text-sm' />
                             <input type="text" placeholder='Degree' value={education.degree || ""} onChange={(e)=> updateEducation(index,"degree",e.target.value)} className='w-full p-2 border border-gray-300 rounded text-sm' />
-                            <input type="text" placeholder='Field' value={education.field || ""} onChange={(e)=> updateEducation(index,"field",e.target.value)} className='w-full p-2 border border-gray-300 rounded text-sm' />
-                            <input type="text" placeholder='Location' value={education.location || ""} onChange={(e)=> updateEducation(index,"location",e.target.value)} className='w-full p-2 border border-gray-300 rounded text-sm' />
+                            <input type="text" placeholder='Field' value={education.field || ""} onChange={(e)=> updateEducation(index,"field",e.target.value)} className='w-full p-2 border border-gray-300 rounded text-sm md:col-span-2' />
+                            <input type="text" placeholder='Location' value={education.location || ""} onChange={(e)=> updateEducation(index,"location",e.target.value)} className='w-full p-2 border border-gray-300 rounded text-sm md:col-span-2' />
                             <input type="date" placeholder='Graduation Date' value={education.graduation_date || ""} onChange={(e)=> updateEducation(index,"graduation_date",e.target.value)} className='w-full p-2 border border-gray-300 rounded text-sm' />
                             <input type="text"placeholder='GPA' value={education.gpa || ""} onChange={(e)=> updateEducation(index,"gpa",e.target.value)} className='w-full p-2 border border-gray-300 rounded text-sm' />
                         </div>

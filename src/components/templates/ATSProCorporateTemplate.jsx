@@ -64,9 +64,12 @@ const ATSProCorporateTemplate = ({ data, accentColor }) => {
                                             <span className="text-gray-500 mx-2">|</span>
                                             <span className="text-sm font-semibold" style={{ color: accentColor }}>{exp.company}</span>
                                         </div>
-                                        <span className="text-xs text-gray-500 bg-gray-100 px-2 py-0.5">
-                                            {formatDate(exp.start_date)} – {exp.is_current ? "Present" : formatDate(exp.end_date)}
-                                        </span>
+                                        <div className="flex flex-col items-end">
+                                            {exp.location && <span className="text-xs text-gray-500 mb-1">{exp.location}</span>}
+                                            <span className="text-xs text-gray-500 bg-gray-100 px-2 py-0.5">
+                                                {formatDate(exp.start_date)} – {exp.is_current ? "Present" : formatDate(exp.end_date)}
+                                            </span>
+                                        </div>
                                     </div>
                                     {exp.description && (
                                         <p className="text-sm text-gray-700 mt-1.5 leading-relaxed whitespace-pre-line pl-3 border-l border-gray-200">
@@ -122,7 +125,10 @@ const ATSProCorporateTemplate = ({ data, accentColor }) => {
                                         <p className="text-sm text-gray-600">{edu.institution}</p>
                                         {edu.gpa && <p className="text-xs text-gray-500">GPA: {edu.gpa}</p>}
                                     </div>
-                                    <span className="text-xs text-gray-500">{formatDate(edu.graduation_date)}</span>
+                                    <div className="flex flex-col items-end">
+                                        {edu.location && <span className="text-xs text-gray-500 mb-1">{edu.location}</span>}
+                                        <span className="text-xs text-gray-500">{formatDate(edu.graduation_date)}</span>
+                                    </div>
                                 </div>
                             ))}
                         </div>

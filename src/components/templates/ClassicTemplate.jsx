@@ -78,6 +78,7 @@ const ClassicTemplate = ({ data, accentColor }) => {
                                         <p className="text-gray-700 font-medium">{exp.company}</p>
                                     </div>
                                     <div className="text-right text-sm text-gray-600">
+                                        {exp.location && <p className="mb-0.5">{exp.location}</p>}
                                         <p>{formatDate(exp.start_date)} - {exp.is_current ? "Present" : formatDate(exp.end_date)}</p>
                                     </div>
                                 </div>
@@ -139,7 +140,8 @@ const ClassicTemplate = ({ data, accentColor }) => {
                                     <p className="text-gray-700">{edu.institution}</p>
                                     {edu.gpa && <p className="text-sm text-gray-600">GPA: {edu.gpa}</p>}
                                 </div>
-                                <div className="text-sm text-gray-600">
+                                <div className="text-right text-sm text-gray-600">
+                                    {edu.location && <p className="mb-0.5">{edu.location}</p>}
                                     <p>{formatDate(edu.graduation_date)}</p>
                                 </div>
                             </div>
