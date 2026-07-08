@@ -7,6 +7,7 @@ const EducationForm = ({data, onChange}) => {
             institution: '',
             degree: '',
             field: '',
+            location: '',
             graduation_date: '',
             gpa:"",
         };
@@ -54,6 +55,7 @@ const updateEducation = (index,field,value) => {
                             <input type="text" placeholder='Institution' value={education.institution || ""} onChange={(e)=> updateEducation(index,"institution",e.target.value)} className='w-full p-2 border border-gray-300 rounded text-sm' />
                             <input type="text" placeholder='Degree' value={education.degree || ""} onChange={(e)=> updateEducation(index,"degree",e.target.value)} className='w-full p-2 border border-gray-300 rounded text-sm' />
                             <input type="text" placeholder='Field' value={education.field || ""} onChange={(e)=> updateEducation(index,"field",e.target.value)} className='w-full p-2 border border-gray-300 rounded text-sm' />
+                            <input type="text" placeholder='Location' value={education.location || ""} onChange={(e)=> updateEducation(index,"location",e.target.value)} className='w-full p-2 border border-gray-300 rounded text-sm' />
                             <input type="date" placeholder='Graduation Date' value={education.graduation_date || ""} onChange={(e)=> updateEducation(index,"graduation_date",e.target.value)} className='w-full p-2 border border-gray-300 rounded text-sm' />
                             <input type="text"placeholder='GPA' value={education.gpa || ""} onChange={(e)=> updateEducation(index,"gpa",e.target.value)} className='w-full p-2 border border-gray-300 rounded text-sm' />
                         </div>

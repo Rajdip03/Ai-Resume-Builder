@@ -7,6 +7,7 @@ const ExperienceForm = ({ data, onChange, setResumeData }) => {
         const newExperience = {
             company: '',
             position: '',
+            location: '',
             start_date: '',
             end_date: '',
             description: '',
@@ -55,6 +56,7 @@ const updateExperience = (index,field,value) => {
                             <div className='grid md:grid-cols-2 gap-3'>
                                 <input type="text" placeholder='Company Name' value={experience.company || ""} onChange={(e)=> updateExperience(index,"company",e.target.value)} className='w-full p-2 border border-gray-300 rounded text-sm' />
                                 <input type="text" placeholder='Job Title' value={experience.position || ""} onChange={(e)=> updateExperience(index,"position",e.target.value)} className='w-full p-2 border border-gray-300 rounded text-sm' />
+                                <input type="text" placeholder='Location' value={experience.location || ""} onChange={(e)=> updateExperience(index,"location",e.target.value)} className='w-full p-2 border border-gray-300 rounded text-sm md:col-span-2' />
                                 <input type="date" placeholder='Start Date' value={experience.start_date || ""} onChange={(e)=> updateExperience(index,"start_date",e.target.value)} className='w-full p-2 border border-gray-300 rounded text-sm' />
                                 <input type="date" disabled={experience.is_current} placeholder='End Date' value={experience.end_date || ""} onChange={(e)=> updateExperience(index,"end_date",e.target.value)} className='w-full p-2 border border-gray-300 rounded text-sm disabled:bg-gray-100' />
                             </div>
