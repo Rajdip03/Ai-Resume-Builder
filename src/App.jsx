@@ -4,9 +4,8 @@ import Home from './pages/Home'
 import Layout from './pages/Layout'
 import Dashboard from './pages/Dashboard'
 import ResumeBuilder from './pages/ResumeBuilder'
-import preview from './pages/preview'
 import Login from './pages/Login'
-
+import Preview from './pages/preview';
 const App = () => {
   return (
     <>
@@ -17,7 +16,7 @@ const App = () => {
           <Route path='builder/:resumeId' element={<ResumeBuilder />} />  {/* Sub Route */}
         </Route>
 
-        <Route path='view/:resumeId' element={<preview />} />
+        <Route path='view/:resumeId' element={<Preview />} />
         <Route path='login' element={<Login />} />
       </Routes>
     </>
