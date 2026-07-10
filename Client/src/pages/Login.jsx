@@ -1,5 +1,5 @@
-import { Lock, Mail, User2Icon } from 'lucide-react'
-import React from 'react'
+import { Lock, Mail, User2Icon, Eye, EyeOff } from 'lucide-react'
+import React, { useState } from 'react'
 
 const Login = () => {
 
@@ -13,6 +13,8 @@ const Login = () => {
     email: '',
     password: ''
   }) 
+
+  const [showPassword, setShowPassword] = useState(false)
 
   const handleChange = (e) => { //updates form Data as user types
     const { name, value } = e.target  //e.target is the input element that triggered the event. It destructures two things from it: 1) name → the input's name attribute (e.g. "email") 2) value → what the user just typed
@@ -47,9 +49,24 @@ const Login = () => {
           <input type="email" name="email" placeholder="Email id" className=" border-none outline-none ring-0" value={formData.email} onChange={handleChange} required />
         </div>
 
-        <div className=" flex items-center mt-6 w-full bg-white border border-gray-300/80 h-12 rounded-full overflow-hidden pl-6 gap-2">
+        <div className="relative flex items-center mt-6 w-full bg-white border border-gray-300/80 h-12 rounded-full overflow-hidden pl-6 gap-2">
           <Lock size={13} color='#6B7280' />
-          <input type="password" name="password" placeholder="Password" className=" border-none outline-none ring-0" value={formData.password} onChange={handleChange} required />
+          <input
+            type={showPassword ? "text" : "password"}
+            name="password"
+            placeholder="Password"
+            className="w-full border-none outline-none ring-0 pr-10"
+            value={formData.password}
+            onChange={handleChange}
+            required
+          />
+          <button
+            type="button"
+            onClick={() => setShowPassword(prev => !prev)}
+            className="absolute right-4 top-1/2 -translate-y-1/2 flex items-center justify-center text-gray-500 hover:text-gray-700 focus:outline-none"
+          >
+            {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+          </button>
         </div>
 
         <div className="mt-4 text-left text-green-500">
