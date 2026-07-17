@@ -1,3 +1,5 @@
+import fs from "fs";
+import imageKit from "../configs/imageKit.js";
 import Resume from "../models/Resume.js";
 
 
@@ -50,6 +52,7 @@ export const getResume = async (req, res) => {
         resume.__v = undefined;
         resume.createdAt = undefined;
         resume.updatedAt = undefined;
+
         //return success message
         return res.status(200).json({ message: "Resume fetched successfully", resume });
     } catch (error) {
@@ -57,21 +60,51 @@ export const getResume = async (req, res) => {
     }
 }
 
-// update user resume
-// PUT: /api/resume/update
-export const updateResume = async (req, res) => {
+// controller for resume by id public
+//GET: /api/resume/public
+export const getPublicResumeById = async (req, res) => {
     try {
-        const userId = req.userId;
         const { resumeId } = req.params;
-        const { title } = req.body;
 
-        // update a resume
-        const updatedResume = await Resume.findOneAndUpdate({ _id: resumeId, userId }, { title }, { new: true });
+        // get resume by id
+        const resume = await Resume.findOne({ public: true, _id: resumeId });
 
+        if (!resume) {
+            return res.status(404).json({ message: "resume not found" });
+        }
         //return success message
-        return res.status(201).json({ message: "Resume updated successfully", resume: updatedResume });
+        return res.status(200).json({ message: "Resume fetched successfully", resume });
     } catch (error) {
         return res.status(400).json({ message: error.message });
     }
 }
+
+// controller for updating a resume
+//PUT: /api/resume/update
+export const updateResume = async (req, res) => {
+    try {
+        const userId = req.userId;
+        const { resumeId, resumeData, removeBackground } = req.body;
+        const image = req.file;
+
+        let resumeDataCopy = JSON.parse(resumeData);
+
+        if (image) {
+
+            const imageBufferData = fs.createReadStream(image.path)
+            const response = await imageKit.files.upload({
+                file: imageBufferData,
+                fileName: "resume.png",
+                folder: "user-resumes",
+                transformation: {
+                    pre: "w-300,h-300, fo-face, z-0.75" + (removeBackground ? " ,e-bgremove" : " ")
+                }
+            });
+            resumeDataCopy.personal_info.image = response.url;
+        }
+        const resume = await Resume.findOneAndUpdate({ userId, _id: resumeId }, resumeDataCopy, { new: true })
+        return res.status(200).json({ message: "Resume updated successfully", resume });
+    } catch (error) {
+        return res.status(400).json({ message: error.message })
+    }
 }
