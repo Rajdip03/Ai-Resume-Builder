@@ -1,4 +1,5 @@
 import ai from "../configs/ai.js";
+import Resume from "../models/Resume.js";
 
 
 //controller for enhancing a resume, professional summary
@@ -61,25 +62,113 @@ export const enhanceJobDescription = async (req, res) => {
 // POST: /api/ai/upload-resume
 export const uploadResume = async (req, res) => {
     try {
-        const file = req.file;
-        if (!file) {
-            return res.status(400).json({ message: "File is required" });
+        const { resumeText, title } = req.body;
+        const userId = req.userId;
+
+        if (!resumeText) {
+            return res.status(400).json({ message: "Missing required fields" });
         }
+        const systemPrompt = "You are an expert AI Agent to extact data from resume.";
+        const userPrompt = `extract data from this resume : ${resumeText} provide data in the following JSON format with no additional text before or after:
+        
+        {
+        personal_info: {
+            image: {
+            type: String,
+            default: ""
+            },
+        full_name: {
+            type: String,
+            default: ""
+            },
+        profession: {
+            type: String,
+            default: ""
+        },
+        email: {
+            type: String,
+            default: ""
+        },
+        phone: {
+            type: String,
+            default: ""
+        },
+        location: {
+            type: String,
+            default: ""
+        },
+        linkedin: {
+            type: String,
+            default: ""
+        },
+        website: {
+            type: String,
+            default: ""
+        },
+    },
+        professional_summary: {
+            type: String,
+            default: "",
+        },
+        skills: [
+            {
+                type: String,
+            }
+        ],
+        experiences:[
+        {
+            company: { type: String },
+            position: { type: String },
+            start_date: { type: String },
+            end_date: { type: String },
+            is_present: { type: Boolean },
+            description: { type: String },
+            location: { type: String },
+        }
+        ],
+        project: [
+        {
+            name: { type: String },
+            tech_stack: { type: String },
+            description: { type: String },
+            link: { type: String }
+        }
+    ],
+    educations: [
+        {
+            degree: { type: String },
+            institution: { type: String },
+            field: { type: String },
+            graduation_date: { type: String },
+            location: { type: String },
+            gpa: { type: String },
+        }
+    ],
+    
+        }
+        `
         const response = await ai.chat.completions.create({
             model: process.env.GEMINI_MODEL,
             messages: [
                 {
                     role: "system",
-                    content: "You are an expert resume writing. Your task is to enhance and improve the job description of a resume. The job description should be only in  1-2 sentence also highlighting key responsibilities, experience, and achievements. use action verbs and quantifiable results where possible.  Make it ATS-friendly. and only return text no options or anything else."
+                    content: systemPrompt,
                 },
                 {
                     role: "user",
-                    content: userContent,
+                    content: userPrompt,
                 },
             ],
+            response_format: { type: "json_object" }
         });
-        const enhancedContent = response.choices[0].message.content;
-        return res.status(200).json({ message: "Job description enhanced successfully", resume: enhancedContent });
+        const extractedData = response.choices[0].message.content;
+        const parsedData = JSON.parse(extractedData)
+        const newResume = await Resume.create({
+            userId,
+            title,
+            ...parsedData,
+        })
+        return res.json({ message: "Resume uploaded successfully", resumeId: newResume._id });
     } catch (error) {
         return res.status(400).json({ message: error.message })
     }
