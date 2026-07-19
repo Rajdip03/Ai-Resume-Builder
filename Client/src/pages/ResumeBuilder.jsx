@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link, useParams, useNavigate } from 'react-router-dom'
 import toast, { Toaster } from 'react-hot-toast';
 import { dummyResumeData } from '../assets/assets';
-import { ArrowLeftIcon, Briefcase, ChevronLeft, ChevronRight, FileText, FolderIcon, GraduationCap, Sparkles, User, Loader2, Share2Icon, EyeIcon, EyeOffIcon, DownloadIcon } from 'lucide-react';
+import { ArrowLeftIcon, Briefcase, ChevronLeft, ChevronRight, FileText, FolderIcon, GraduationCap, Sparkles, User, Loader2, Share2Icon, EyeIcon, EyeOffIcon, DownloadIcon, ScanLineIcon } from 'lucide-react';
 import PersonalInfoForm from '../components/PersonalInfoForm';
 import ResumePreview from '../components/ResumePreview';
 import TemplateSelector from '../components/TemplateSelector';
@@ -237,6 +237,9 @@ const ResumeBuilder = () => {
                 </button>
                 <button onClick={downloadResume} className='flex items-center p-2 px-4 gap-2 text-xs bg-gradient-to-br from-green-100 to-green-200 text-green-600 rounded-lg ring-green-300 hover:ring transition-colors'>
                   <DownloadIcon className='size-4' /> Download
+                </button>
+                <button onClick={() => navigate(`/app/ats/${resumeData._id}`)} className='flex items-center p-2 px-4 gap-2 text-xs bg-gradient-to-br from-indigo-100 to-indigo-200 text-indigo-600 rounded-lg ring-indigo-300 hover:ring transition-colors'>
+                  <ScanLineIcon className='size-4' /> ATS Scan
                 </button>
               </div>
             </div>
