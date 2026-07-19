@@ -6,6 +6,7 @@ import Dashboard from './pages/Dashboard'
 import ResumeBuilder from './pages/ResumeBuilder'
 import Login from './pages/Login'
 import Preview from './pages/preview';
+import ATSReport from './pages/ATSReport';
 const App = () => {
   return (
     <>
@@ -14,6 +15,7 @@ const App = () => {
         <Route path='app' element={<Layout />}>
           <Route index element={<Dashboard />} />       {/* Sub Route */}
           <Route path='builder/:resumeId' element={<ResumeBuilder />} />  {/* Sub Route */}
+          <Route path='ats/:resumeId' element={<ATSReport />} />
         </Route>
 
         <Route path='view/:resumeId' element={<Preview />} />
