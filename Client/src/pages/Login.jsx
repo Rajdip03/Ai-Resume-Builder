@@ -1,8 +1,12 @@
 import { Lock, Mail, User2Icon, Eye, EyeOff } from 'lucide-react'
 import React, { useState } from 'react'
-
+import api from '../configs/api'
+import { useDispatch } from 'react-redux'
+import { login } from "../app/features/authSlice";
+import toast from 'react-hot-toast'
 const Login = () => {
 
+  const dispatch = useDispatch()
   const query = new URLSearchParams(window.location.search)
   const urlState = query.get('state')
 
@@ -12,17 +16,27 @@ const Login = () => {
     name: '',
     email: '',
     password: ''
-  }) 
+  })
 
   const [showPassword, setShowPassword] = useState(false)
 
   const handleChange = (e) => { //updates form Data as user types
     const { name, value } = e.target  //e.target is the input element that triggered the event. It destructures two things from it: 1) name → the input's name attribute (e.g. "email") 2) value → what the user just typed
     setFormData(prev => ({ ...prev, [name]: value })) // updates only that field
-  } 
+  }
 
-  const handleSubmit = (e) => {  //fires when form is submitted
+  const handleSubmit = async (e) => {  //fires when form is submitted
     e.preventDefault()
+    try {
+      const { data } = await api.post(`/api/users/${state}`, formData)
+      console.log(data);
+      dispatch(login(data))
+      localStorage.setItem('token', data.token)
+      toast.success(data.message)
+    } catch (error) {
+      toast.error(error?.response?.data?.message || error.message);
+      console.log("Login Error:",error);
+    }
 
   }
 
