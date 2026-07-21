@@ -168,8 +168,10 @@ export const uploadResume = async (req, res) => {
             title,
             ...parsedData,
         })
-        return res.json({ message: "Resume uploaded successfully", resumeId: newResume._id });
+        return res.json({ message: "Resume uploaded successfully", resume: newResume });
     } catch (error) {
+        console.error("UPLOAD RESUME ERROR:");
+        console.error(error)
         return res.status(400).json({ message: error.message })
     }
 }
