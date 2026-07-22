@@ -24,7 +24,13 @@ const Dashboard = () => {
   const navigate = useNavigate()
 
   const loadAllResume = async () => {
-    setAllResume(dummyResumeData)
+    try {
+      const { data } = await api.get('/api/users/resumes', { headers: { Authorization: token } })
+      setAllResume(data);
+    } catch (error) {
+      console.log("Error loading all resume:", error);
+      toast.error(error?.response?.data?.message || error.message);
+    }
   }
 
   const CreateResume = async (event) => {
@@ -92,7 +98,7 @@ const Dashboard = () => {
         </div>
         <hr className="border-slate-300 my-6 sm:w-[305px]" />
         <div className="grid grid-cols-2 sm:flex flex-wrap gap-4">
-          {allResume.map((resume, index) => {
+          {allResume?.map((resume, index) => {
             const baseColor = colors[index % colors.length];
             return (
               <button key={index} onClick={() => navigate(`/app/builder/${resume._id}`)} className="relative w-full sm:max-w-36 h-48 flex flex-col items-center justify-center gap-2 rounded-lg border group hover:shadow-lg transition-all duration-300 cursor-pointer" style={{ background: `linear-gradient(135deg, ${baseColor}10, ${baseColor}40)`, borderColor: baseColor + '40' }}>
