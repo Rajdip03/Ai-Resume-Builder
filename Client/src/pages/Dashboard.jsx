@@ -1,4 +1,4 @@
-import { FilePenLineIcon, PenIcon, PlusIcon, TrashIcon, UploadCloud, UploadCloudIcon, XIcon } from "lucide-react";
+import { FilePenLineIcon, LoaderCircle, LoaderCircleIcon, PenIcon, PlusIcon, TrashIcon, UploadCloud, UploadCloudIcon, XIcon } from "lucide-react";
 import React from "react";
 import { dummyResumeData } from "../assets/assets";
 import { useNavigate } from "react-router-dom";
@@ -63,12 +63,33 @@ const Dashboard = () => {
     setIsLoading(false)
   }
   const editTitle = async (event) => {
-    event.preventDefault()
+    try {
+      event.preventDefault()
+      const { data } = await api.put(`/api/resumes/update/${editResumeId}`, { resumeId: editResumeId, resumeData: {title} }, { headers: { Authorization: token } })
+      setAllResume(allResume.map((resume) => resume._id === editResumeId ? {...resume,  title} : resume))
+      setTitle('')
+      setEditResumeId('')
+      toast.success(data.message)
+    } catch (error) {
+      console.log("Error editing title:", error);
+      toast.error(error?.response?.data?.message || error.message);
+    }
   }
   const deleteResume = async (resumeId) => {
-    const confirm = window.confirm('Are you sure you want to delete this resume?')
-    if (confirm) {
-      setAllResume(prev => prev.filter(resume => resume._id !== resumeId))
+    try {
+      const confirm = window.confirm('Are you sure you want to delete this resume?')
+      if (confirm) {
+        const { data } = await api.delete('/api/resumes/delete/${resumeId}', {
+          headers: { Authorization: token },
+          data: { resumeId }
+        })
+        setAllResume(allResume.filter(() => resume._id !== resumeId))
+        toast.success(data.message)
+      }
+    }
+    catch (error) {
+      console.log("Error deleting resume:", error);
+      toast.error(error?.response?.data?.message || error.message);
     }
   }
 
@@ -154,7 +175,10 @@ const Dashboard = () => {
                     </label>
                     <input type="file" accept=".pdf" id="resume-input" hidden onChange={(event) => { setResume(event.target.files[0]) }} />
                   </div>
-                  <button className="w-full py-2 bg-green-600 text-white rounded hover:bg-green-700 transition-colors">Upload Resume</button>
+                  <button className="w-full py-2 bg-green-600 text-white rounded hover:bg-green-700 transition-colors">
+                    {isLoading && <LoaderCircleIcon className="animate-spin size-4 text-white" />}
+                    {isLoading ? 'uploading...' : 'Upload Resume'}
+                  </button>
                   <XIcon className="absolute top-4 right-4 text-slate-400 hover:text-slate-600 cursor-pointer transition-colors" onClick={() => { SetShowUploadResume(false); setTitle('') }} />
                 </div>
               </form>
