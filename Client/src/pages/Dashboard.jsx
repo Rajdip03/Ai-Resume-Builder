@@ -79,11 +79,11 @@ const Dashboard = () => {
     try {
       const confirm = window.confirm('Are you sure you want to delete this resume?')
       if (confirm) {
-        const { data } = await api.delete('/api/resumes/delete/${resumeId}', {
+        const { data } = await api.delete(`/api/resumes/delete/${resumeId}`, {
           headers: { Authorization: token },
           data: { resumeId }
         })
-        setAllResume(allResume.filter(() => resume._id !== resumeId))
+        setAllResume(allResume.filter((resume) => resume._id !== resumeId))
         toast.success(data.message)
       }
     }
