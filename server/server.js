@@ -10,7 +10,7 @@ import atsRouter from "./routes/atsRoutes.js";
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Datbase connection
+// Database connection
 await connectDB()
 
 app.use(cors());
