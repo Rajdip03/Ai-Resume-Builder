@@ -12,10 +12,13 @@ import ExperienceForm from '../components/ExperienceForm';
 import EducationForm from '../components/EducationForm';
 import ProjectForm from '../components/ProjectForm';
 import SkillsForm from '../components/SkillsForm';
+import { useSelector } from 'react-redux';
+import api from '../configs/api';
 
 const ResumeBuilder = () => {
 
   const { resumeId } = useParams()
+  const { token } = useSelector((state) => state.auth)
   const navigate = useNavigate()
   const [isSaving, setIsSaving] = useState(false)
 
@@ -24,32 +27,31 @@ const ResumeBuilder = () => {
     title: '',
     personal_info: {},
     professional_summary: "",
-    experience: [],
-    education: [],
+    experiences: [],
+    educations: [],
     project: [],
     skills: [],
     template: "classic",
     accent_color: "#3B82F6",
     public: false
   })
-
   const loadExistingResume = async () => {
-    let resume = null;
-
-    if (resumeId && resumeId !== 'new') {
-      const savedResumes = JSON.parse(localStorage.getItem('saved_resumes') || '[]');
-      resume = savedResumes.find((r) => r._id === resumeId);
-
-      if (!resume) {
-        resume = dummyResumeData.find((r) => r._id === resumeId);
-      }
+    if (!resumeId || !token) {
+      console.log("loadExistingResume skipped — resumeId:", resumeId, "token:", token);
+      return;
     }
-
-    if (resume) {
-      setResumeData(resume);
-      document.title = resume.title || "Resume Builder";
-    } else {
-      document.title = "New Resume - Resume Builder";
+    console.log("loadExistingResume called — resumeId:", resumeId, "token:", token);
+    try {
+      const { data } = await api.get(`/api/resumes/get/` + resumeId, { headers: { Authorization: token } })
+      console.log("loadExistingResume response:", data);
+      if (data.resume) {
+        setResumeData(data.resume)
+        console.log("setResumeData called with:", data.resume);
+        document.title = data.resume.title;
+      }
+    } catch (error) {
+      console.error("loadExistingResume error:", error);
+      toast.error(error?.response?.data?.message || "Failed to load resume")
     }
   }
 
@@ -129,7 +131,7 @@ const ResumeBuilder = () => {
 
   useEffect(() => {
     loadExistingResume()
-  }, [])
+  }, [resumeId, token])
 
   const changeResumeVisibility = async () => {
     setResumeData({ ...resumeData, public: !resumeData.public })
@@ -137,13 +139,13 @@ const ResumeBuilder = () => {
   const handleShare = () => {
     const frontendUrl = window.location.href.split('/app/')[0];
     const resumeUrl = `${frontendUrl}/view/${resumeData._id}`;
-    if(navigator.share){
-      navigator.share({url:resumeUrl, text: "My Resume",})
-    }else{
+    if (navigator.share) {
+      navigator.share({ url: resumeUrl, text: "My Resume", })
+    } else {
       alert("share not supported on this browser");
     }
   }
-  const downloadResume= ()=>{
+  const downloadResume = () => {
     window.print();
   }
   return (
@@ -194,10 +196,10 @@ const ResumeBuilder = () => {
                   <ProfessionalSummaryForm data={resumeData.professional_summary} onChange={(data) => setResumeData(prev => ({ ...prev, professional_summary: data }))} />
                 )}
                 {activeSection.id === "experience" && (
-                  <ExperienceForm data={resumeData.experience} onChange={(data) => setResumeData(prev => ({ ...prev, experience: data }))} />
+                  <ExperienceForm data={resumeData.experiences} onChange={(data) => setResumeData(prev => ({ ...prev, experiences: data }))} />
                 )}
                 {activeSection.id === "education" && (
-                  <EducationForm data={resumeData.education} onChange={(data) => setResumeData(prev => ({ ...prev, education: data }))} />
+                  <EducationForm data={resumeData.educations} onChange={(data) => setResumeData(prev => ({ ...prev, educations: data }))} />
                 )}
                 {activeSection.id === "project" && (
                   <ProjectForm data={resumeData.project} onChange={(data) => setResumeData(prev => ({ ...prev, project: data }))} />

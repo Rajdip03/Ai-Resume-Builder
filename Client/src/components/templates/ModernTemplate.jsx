@@ -64,14 +64,14 @@ const ModernTemplate = ({ data, accentColor }) => {
 				)}
 
 				{/* Experience */}
-				{data.experience && data.experience.length > 0 && (
+				{data.experiences && data.experiences.length > 0 && (
 					<section className="mb-8">
 						<h2 className="text-2xl font-light mb-6 pb-2 border-b border-gray-200">
 							Experience
 						</h2>
 
 						<div className="space-y-6">
-							{data.experience.map((exp, index) => (
+							{data.experiences.map((exp, index) => (
 								<div key={index} className="relative pl-6 border-l border-gray-200">
 
 									<div className="flex justify-between items-start mb-2">
@@ -82,7 +82,7 @@ const ModernTemplate = ({ data, accentColor }) => {
 										<div className="flex flex-col items-end">
 											{exp.location && <span className="text-sm text-gray-500 mb-1">{exp.location}</span>}
 											<div className="text-sm text-gray-500 bg-gray-100 px-3 py-1 rounded">
-												{formatDate(exp.start_date)} - {exp.is_current ? "Present" : formatDate(exp.end_date)}
+												{formatDate(exp.start_date)} - {exp.is_present ? "Present" : formatDate(exp.end_date)}
 											</div>
 										</div>
 									</div>
@@ -112,9 +112,9 @@ const ModernTemplate = ({ data, accentColor }) => {
 									<div className="flex justify-between items-start">
 										<div>
 											<h3 className="text-lg font-medium text-gray-900">{p.name}</h3>
-											{p.tech_stack?.length > 0 && (
+											{p.tech_stack && (Array.isArray(p.tech_stack) ? p.tech_stack.length > 0 : String(p.tech_stack).trim()) && (
 												<p className="text-sm text-gray-600 mt-1">
-													<strong>Tech Stack:</strong> {p.tech_stack.join(", ")}
+													<strong>Tech Stack:</strong> {Array.isArray(p.tech_stack) ? p.tech_stack.join(", ") : String(p.tech_stack)}
 												</p>
 											)}
 											{p.link && (
@@ -137,14 +137,14 @@ const ModernTemplate = ({ data, accentColor }) => {
 
 				<div className="grid sm:grid-cols-2 gap-8">
 					{/* Education */}
-					{data.education && data.education.length > 0 && (
+					{data.educations && data.educations.length > 0 && (
 						<section>
 							<h2 className="text-2xl font-light mb-4 pb-2 border-b border-gray-200">
 								Education
 							</h2>
 
 							<div className="space-y-4">
-								{data.education.map((edu, index) => (
+								{data.educations.map((edu, index) => (
 									<div key={index}>
 										<h3 className="font-semibold text-gray-900">
 											{edu.degree} {edu.field && `in ${edu.field}`}

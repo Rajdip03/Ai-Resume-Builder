@@ -43,7 +43,7 @@ const ResumeSchema = new mongoose.Schema({
     project: [
         {
             name: { type: String },
-            tech_stack: { type: String },
+            tech_stack: [{ type: String }],
             description: { type: String },
             link: { type: String }
         }

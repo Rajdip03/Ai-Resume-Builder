@@ -11,7 +11,7 @@ const ExperienceForm = ({ data, onChange, setResumeData }) => {
             start_date: '',
             end_date: '',
             description: '',
-            is_current: false,
+            is_present: false,
         };
         onChange([...data, newExperience]);
     };
@@ -58,10 +58,10 @@ const updateExperience = (index,field,value) => {
                                 <input type="text" placeholder='Job Title' value={experience.position || ""} onChange={(e)=> updateExperience(index,"position",e.target.value)} className='w-full p-2 border border-gray-300 rounded text-sm' />
                                 <input type="text" placeholder='Location' value={experience.location || ""} onChange={(e)=> updateExperience(index,"location",e.target.value)} className='w-full p-2 border border-gray-300 rounded text-sm md:col-span-2' />
                                 <input type="date" placeholder='Start Date' value={experience.start_date || ""} onChange={(e)=> updateExperience(index,"start_date",e.target.value)} className='w-full p-2 border border-gray-300 rounded text-sm' />
-                                <input type="date" disabled={experience.is_current} placeholder='End Date' value={experience.end_date || ""} onChange={(e)=> updateExperience(index,"end_date",e.target.value)} className='w-full p-2 border border-gray-300 rounded text-sm disabled:bg-gray-100' />
+                                <input type="date" disabled={experience.is_present} placeholder='End Date' value={experience.end_date || ""} onChange={(e)=> updateExperience(index,"end_date",e.target.value)} className='w-full p-2 border border-gray-300 rounded text-sm disabled:bg-gray-100' />
                             </div>
                             <label className='flex items-center gap-2'>
-                                <input type="checkbox" checked={experience.is_current || false} onChange={(e)=> updateExperience(index,"is_current",e.target.checked ? true : false)} className='rounded border-gray-300 text-blue-600 focus:ring-blue-500 focus:border-transparent'/>
+                                <input type="checkbox" checked={experience.is_present || false} onChange={(e)=> updateExperience(index,"is_present",e.target.checked ? true : false)} className='rounded border-gray-300 text-blue-600 focus:ring-blue-500 focus:border-transparent'/>
                                 <span className='text-sm text-gray-700'>Currently working here</span>
                             </label>
                             <div className='space-y-2'>

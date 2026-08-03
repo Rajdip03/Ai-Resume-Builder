@@ -48,19 +48,19 @@ const ExecutiveBoardroomTemplate = ({ data, accentColor }) => {
                 )}
 
                 {/* Experience */}
-                {data.experience && data.experience.length > 0 && (
+                {data.experiences && data.experiences.length > 0 && (
                     <section className="mb-8">
                         <div className="flex items-center gap-4 mb-4">
                             <span className="text-xs font-bold tracking-widest uppercase" style={{ color: accentColor }}>Career Record</span>
                             <div className="flex-1 h-px bg-gray-300" />
                         </div>
                         <div className="space-y-5">
-                            {data.experience.map((exp, i) => (
+                            {data.experiences.map((exp, i) => (
                                 <div key={i} className="grid grid-cols-4 gap-4">
                                     <div className="col-span-1 text-right pt-0.5">
                                         <p className="text-xs text-gray-500" style={{ fontFamily: "'Arial', sans-serif" }}>
                                             {exp.location && <span className="block mb-1">{exp.location}</span>}
-                                            {formatDate(exp.start_date)} –<br />{exp.is_current ? "Present" : formatDate(exp.end_date)}
+                                            {formatDate(exp.start_date)} –<br />{exp.is_present ? "Present" : formatDate(exp.end_date)}
                                         </p>
                                         <p className="text-xs font-semibold text-gray-700 mt-1">{exp.company}</p>
                                     </div>
@@ -93,7 +93,7 @@ const ExecutiveBoardroomTemplate = ({ data, accentColor }) => {
                                         <p className="text-xs text-gray-600 mt-1 leading-relaxed" style={{ fontFamily: "'Arial', sans-serif" }}>{proj.description}</p>
                                     </div>
                                     <div className="mt-3 text-[11px] text-gray-500 space-y-1" style={{ fontFamily: "'Arial', sans-serif" }}>
-                                        {proj.tech_stack?.length > 0 && <div><strong>Tech:</strong> {proj.tech_stack.join(", ")}</div>}
+                                        {proj.tech_stack && (Array.isArray(proj.tech_stack) ? proj.tech_stack.length > 0 : String(proj.tech_stack).trim()) && <div><strong>Tech:</strong> {Array.isArray(proj.tech_stack) ? proj.tech_stack.join(", ") : String(proj.tech_stack)}</div>}
                                         {proj.link && <div><a href={proj.link} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">{proj.link}</a></div>}
                                     </div>
                                 </div>
@@ -104,14 +104,14 @@ const ExecutiveBoardroomTemplate = ({ data, accentColor }) => {
 
                 {/* Bottom row */}
                 <div className="grid grid-cols-2 gap-8">
-                    {data.education && data.education.length > 0 && (
+                    {data.educations && data.educations.length > 0 && (
                         <section>
                             <div className="flex items-center gap-4 mb-4">
                                 <span className="text-xs font-bold tracking-widest uppercase" style={{ color: accentColor }}>Education</span>
                                 <div className="flex-1 h-px bg-gray-300" />
                             </div>
                             <div className="space-y-3">
-                                {data.education.map((edu, i) => (
+                                {data.educations.map((edu, i) => (
                                     <div key={i}>
                                         <p className="font-bold text-sm text-gray-900">{edu.degree}{edu.field ? `, ${edu.field}` : ""}</p>
                                         <p className="text-xs text-gray-600" style={{ fontFamily: "'Arial', sans-serif" }}>{edu.institution}</p>

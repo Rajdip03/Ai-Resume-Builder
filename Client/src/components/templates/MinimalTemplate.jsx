@@ -40,21 +40,21 @@ const MinimalTemplate = ({ data, accentColor }) => {
             )}
 
             {/* Experience */}
-            {data.experience && data.experience.length > 0 && (
+            {data.experiences && data.experiences.length > 0 && (
                 <section className="mb-10">
                     <h2 className="text-sm uppercase tracking-widest mb-6 font-medium" style={{ color: accentColor }}>
                         Experience
                     </h2>
 
                     <div className="space-y-6">
-                        {data.experience.map((exp, index) => (
+                        {data.experiences.map((exp, index) => (
                             <div key={index}>
                                 <div className="flex justify-between items-baseline mb-1">
                                     <h3 className="text-lg font-medium">{exp.position}</h3>
                                     <div className="flex flex-col items-end whitespace-nowrap ml-4">
                                         {exp.location && <span className="text-gray-500 text-sm mb-0.5">{exp.location}</span>}
                                         <span className="text-gray-500 text-sm">
-                                            {formatDate(exp.start_date)} - {exp.is_current ? "Present" : formatDate(exp.end_date)}
+                                            {formatDate(exp.start_date)} - {exp.is_present ? "Present" : formatDate(exp.end_date)}
                                         </span>
                                     </div>
                                 </div>
@@ -81,9 +81,9 @@ const MinimalTemplate = ({ data, accentColor }) => {
                         {(data.project || data.projects).map((proj, index) => (
                             <div key={index} className="flex flex-col gap-1 justify-between items-baseline">
                                 <h3 className="text-lg font-medium ">{proj.name}</h3>
-                                {proj.tech_stack?.length > 0 && (
+                                {proj.tech_stack && (Array.isArray(proj.tech_stack) ? proj.tech_stack.length > 0 : String(proj.tech_stack).trim()) && (
                                     <p className="text-sm text-gray-700">
-                                        <strong>Tech Stack:</strong> {proj.tech_stack.join(", ")}
+                                        <strong>Tech Stack:</strong> {Array.isArray(proj.tech_stack) ? proj.tech_stack.join(", ") : String(proj.tech_stack)}
                                     </p>
                                 )}
                                 {proj.description && <p className="text-gray-600 mt-1">{proj.description}</p>}
@@ -99,14 +99,14 @@ const MinimalTemplate = ({ data, accentColor }) => {
             )}
 
             {/* Education */}
-            {data.education && data.education.length > 0 && (
+            {data.educations && data.educations.length > 0 && (
                 <section className="mb-10">
                     <h2 className="text-sm uppercase tracking-widest mb-6 font-medium" style={{ color: accentColor }}>
                         Education
                     </h2>
 
                     <div className="space-y-4">
-                        {data.education.map((edu, index) => (
+                        {data.educations.map((edu, index) => (
                             <div key={index} className="flex justify-between items-baseline">
                                 <div>
                                     <h3 className="font-medium">

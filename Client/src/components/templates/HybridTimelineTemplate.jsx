@@ -65,13 +65,13 @@ const HybridTimelineTemplate = ({ data, accentColor }) => {
                         </section>
                     )}
 
-                    {data.education && data.education.length > 0 && (
+                    {data.educations && data.educations.length > 0 && (
                         <section>
                             <h2 className="text-xs font-extrabold tracking-widest uppercase mb-2 pb-1 border-b" style={{ color: accentColor, borderColor: accentColor }}>
                                 Education
                             </h2>
                             <div className="space-y-3">
-                                {data.education.map((edu, i) => (
+                                {data.educations.map((edu, i) => (
                                     <div key={i} className="text-xs">
                                         <p className="font-bold text-gray-900">{edu.degree}</p>
                                         {edu.field && <p className="text-gray-600">{edu.field}</p>}
@@ -89,7 +89,7 @@ const HybridTimelineTemplate = ({ data, accentColor }) => {
 
                 {/* Right column: timeline of experience + projects */}
                 <div className="col-span-2">
-                    {data.experience && data.experience.length > 0 && (
+                    {data.experiences && data.experiences.length > 0 && (
                         <section className="mb-7">
                             <h2 className="text-xs font-extrabold tracking-widest uppercase mb-4" style={{ color: accentColor }}>
                                 Experience
@@ -98,7 +98,7 @@ const HybridTimelineTemplate = ({ data, accentColor }) => {
                                 {/* Vertical line */}
                                 <div className="absolute left-12 top-0 bottom-0 w-px bg-gray-200" />
                                 <div className="space-y-6">
-                                    {data.experience.map((exp, i) => (
+                                    {data.experiences.map((exp, i) => (
                                         <div key={i} className="flex gap-4">
                                             {/* Year badge */}
                                             <div className="w-12 flex-shrink-0 text-right">
@@ -115,7 +115,7 @@ const HybridTimelineTemplate = ({ data, accentColor }) => {
                                                     <div className="flex flex-col items-end">
                                                         {exp.location && <span className="text-xs text-gray-500 mb-0.5">{exp.location}</span>}
                                                         <span className="text-xs text-gray-500 font-medium">
-                                                            {formatDate(exp.start_date)} – {exp.is_current ? "Present" : formatDate(exp.end_date)}
+                                                            {formatDate(exp.start_date)} – {exp.is_present ? "Present" : formatDate(exp.end_date)}
                                                         </span>
                                                     </div>
                                                 </div>
@@ -148,7 +148,7 @@ const HybridTimelineTemplate = ({ data, accentColor }) => {
                                             <p className="text-xs text-gray-500 leading-relaxed pl-4">{proj.description}</p>
                                         </div>
                                         <div className="pl-4 mt-2 space-y-1 text-[10px] text-gray-400">
-                                            {proj.tech_stack?.length > 0 && <div><strong>Tech:</strong> {proj.tech_stack.join(", ")}</div>}
+                                            {proj.tech_stack && (Array.isArray(proj.tech_stack) ? proj.tech_stack.length > 0 : String(proj.tech_stack).trim()) && <div><strong>Tech:</strong> {Array.isArray(proj.tech_stack) ? proj.tech_stack.join(", ") : String(proj.tech_stack)}</div>}
                                             {proj.link && <div><a href={proj.link} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">{proj.link}</a></div>}
                                         </div>
                                     </div>

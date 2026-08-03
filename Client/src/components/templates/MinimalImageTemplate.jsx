@@ -71,13 +71,13 @@ const MinimalImageTemplate = ({ data, accentColor }) => {
                     </section>
 
                     {/* Education */}
-                    {data.education && data.education.length > 0 && (
+                    {data.educations && data.educations.length > 0 && (
                         <section className="mb-8">
                             <h2 className="text-sm font-semibold tracking-widest text-zinc-600 mb-3">
                                 EDUCATION
                             </h2>
                             <div className="space-y-4 text-sm">
-                                {data.education.map((edu, index) => (
+                                {data.educations.map((edu, index) => (
                                     <div key={index}>
                                         <p className="font-semibold uppercase">{edu.degree}</p>
                                         <p className="text-zinc-600">{edu.institution}</p>
@@ -122,13 +122,13 @@ const MinimalImageTemplate = ({ data, accentColor }) => {
                     )}
 
                     {/* Experience */}
-                    {data.experience && data.experience.length > 0 && (
+                    {data.experiences && data.experiences.length > 0 && (
                         <section>
                             <h2 className="text-sm font-semibold tracking-widest mb-4" style={{ color: accentColor }} >
                                 EXPERIENCE
                             </h2>
                             <div className="space-y-6 mb-8">
-                                {data.experience.map((exp, index) => (
+                                {data.experiences.map((exp, index) => (
                                     <div key={index}>
                                         <div className="flex justify-between items-center">
                                             <h3 className="font-semibold text-zinc-900">
@@ -138,7 +138,7 @@ const MinimalImageTemplate = ({ data, accentColor }) => {
                                                 {exp.location && <span className="text-sm text-zinc-500 mb-0.5">{exp.location}</span>}
                                                 <span className="text-sm text-zinc-500">
                                                     {formatDate(exp.start_date)} -{" "}
-                                                    {exp.is_current ? "Present" : formatDate(exp.end_date)}
+                                                    {exp.is_present ? "Present" : formatDate(exp.end_date)}
                                                 </span>
                                             </div>
                                         </div>
@@ -168,9 +168,9 @@ const MinimalImageTemplate = ({ data, accentColor }) => {
                                 {(data.project || data.projects).map((project, index) => (
                                     <div key={index}>
                                         <h3 className="text-md font-medium text-zinc-800 mt-3">{project.name}</h3>
-                                        {project.tech_stack?.length > 0 && (
+                                        {project.tech_stack && (Array.isArray(project.tech_stack) ? project.tech_stack.length > 0 : String(project.tech_stack).trim()) && (
                                             <p className="text-sm mb-1" style={{ color: accentColor }} >
-                                                {project.tech_stack.join(", ")}
+                                                {Array.isArray(project.tech_stack) ? project.tech_stack.join(", ") : String(project.tech_stack)}
                                             </p>
                                         )}
                                         {project.link && (
