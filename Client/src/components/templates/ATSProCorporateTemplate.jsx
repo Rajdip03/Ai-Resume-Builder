@@ -50,13 +50,13 @@ const ATSProCorporateTemplate = ({ data, accentColor }) => {
                 )}
 
                 {/* Experience */}
-                {data.experience && data.experience.length > 0 && (
+                {data.experiences && data.experiences.length > 0 && (
                     <section>
                         <h2 className="text-xs font-bold tracking-widest uppercase mb-3 pb-1 border-b-2" style={{ color: accentColor, borderColor: accentColor }}>
                             Work Experience
                         </h2>
                         <div className="space-y-5">
-                            {data.experience.map((exp, i) => (
+                            {data.experiences.map((exp, i) => (
                                 <div key={i}>
                                     <div className="flex justify-between items-baseline">
                                         <div>
@@ -67,7 +67,7 @@ const ATSProCorporateTemplate = ({ data, accentColor }) => {
                                         <div className="flex flex-col items-end">
                                             {exp.location && <span className="text-xs text-gray-500 mb-1">{exp.location}</span>}
                                             <span className="text-xs text-gray-500 bg-gray-100 px-2 py-0.5">
-                                                {formatDate(exp.start_date)} – {exp.is_current ? "Present" : formatDate(exp.end_date)}
+                                                {formatDate(exp.start_date)} – {exp.is_present ? "Present" : formatDate(exp.end_date)}
                                             </span>
                                         </div>
                                     </div>
@@ -96,8 +96,8 @@ const ATSProCorporateTemplate = ({ data, accentColor }) => {
                                         <span className="text-sm text-gray-700 leading-relaxed">{proj.description}</span>
                                     </div>
                                     <div className="flex gap-4 text-xs text-gray-600">
-                                        {proj.tech_stack?.length > 0 && (
-                                            <span><strong>Tech:</strong> {proj.tech_stack.join(", ")}</span>
+                                        {proj.tech_stack && (Array.isArray(proj.tech_stack) ? proj.tech_stack.length > 0 : String(proj.tech_stack).trim()) && (
+                                            <span><strong>Tech:</strong> {Array.isArray(proj.tech_stack) ? proj.tech_stack.join(", ") : String(proj.tech_stack)}</span>
                                         )}
                                         {proj.link && (
                                             <a href={proj.link} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
@@ -112,13 +112,13 @@ const ATSProCorporateTemplate = ({ data, accentColor }) => {
                 )}
 
                 {/* Education */}
-                {data.education && data.education.length > 0 && (
+                {data.educations && data.educations.length > 0 && (
                     <section>
                         <h2 className="text-xs font-bold tracking-widest uppercase mb-3 pb-1 border-b-2" style={{ color: accentColor, borderColor: accentColor }}>
                             Education
                         </h2>
                         <div className="space-y-3">
-                            {data.education.map((edu, i) => (
+                            {data.educations.map((edu, i) => (
                                 <div key={i} className="flex justify-between items-start">
                                     <div>
                                         <p className="font-bold text-sm text-gray-900">{edu.degree}{edu.field ? ` in ${edu.field}` : ""}</p>

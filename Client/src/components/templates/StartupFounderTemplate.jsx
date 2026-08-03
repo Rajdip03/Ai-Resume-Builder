@@ -54,11 +54,11 @@ const StartupFounderTemplate = ({ data, accentColor }) => {
                 )}
 
                 {/* Experience — card style */}
-                {data.experience && data.experience.length > 0 && (
+                {data.experiences && data.experiences.length > 0 && (
                     <section className="mb-8">
                         <h2 className="text-xs font-black tracking-widest uppercase mb-4 text-gray-400">Where I've Built</h2>
                         <div className="space-y-4">
-                            {data.experience.map((exp, i) => (
+                            {data.experiences.map((exp, i) => (
                                 <div key={i} className="relative p-5 border border-gray-100 hover:border-gray-300 transition-colors">
                                     <div className="absolute top-0 left-0 w-1 h-full" style={{ backgroundColor: i === 0 ? accentColor : "#e5e7eb" }} />
                                     <div className="flex justify-between items-start flex-wrap gap-2">
@@ -69,7 +69,7 @@ const StartupFounderTemplate = ({ data, accentColor }) => {
                                         <div className="flex flex-col items-end">
                                             {exp.location && <span className="text-xs text-gray-400 mb-0.5">{exp.location}</span>}
                                             <span className="text-xs text-gray-400 bg-gray-50 px-2 py-1">
-                                                {formatDate(exp.start_date)} – {exp.is_current ? "Now" : formatDate(exp.end_date)}
+                                                {formatDate(exp.start_date)} – {exp.is_present ? "Now" : formatDate(exp.end_date)}
                                             </span>
                                         </div>
                                     </div>
@@ -95,7 +95,7 @@ const StartupFounderTemplate = ({ data, accentColor }) => {
                                     </div>
                                     {(proj.tech_stack?.length > 0 || proj.link) && (
                                         <div className="mt-3 text-[11px] text-gray-500 space-y-1 font-medium">
-                                            {proj.tech_stack?.length > 0 && <div><span className="text-gray-400 font-bold uppercase tracking-wider text-[9px]">Stack:</span> {proj.tech_stack.join(", ")}</div>}
+                                            {proj.tech_stack && (Array.isArray(proj.tech_stack) ? proj.tech_stack.length > 0 : String(proj.tech_stack).trim()) && <div><span className="text-gray-400 font-bold uppercase tracking-wider text-[9px]">Stack:</span> {Array.isArray(proj.tech_stack) ? proj.tech_stack.join(", ") : String(proj.tech_stack)}</div>}
                                             {proj.link && <div><a href={proj.link} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">View Project ↗</a></div>}
                                         </div>
                                     )}
@@ -106,11 +106,11 @@ const StartupFounderTemplate = ({ data, accentColor }) => {
                 )}
 
                 {/* Education inline */}
-                {data.education && data.education.length > 0 && (
+                {data.educations && data.educations.length > 0 && (
                     <section>
                         <h2 className="text-xs font-black tracking-widest uppercase mb-3 text-gray-400">Education</h2>
                         <div className="flex flex-wrap gap-6">
-                            {data.education.map((edu, i) => (
+                            {data.educations.map((edu, i) => (
                                 <div key={i} className="text-sm">
                                     <span className="font-bold text-gray-900">{edu.degree}{edu.field ? ` / ${edu.field}` : ""}</span>
                                     <span className="text-gray-400 mx-2">·</span>

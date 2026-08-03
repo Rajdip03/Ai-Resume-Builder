@@ -45,11 +45,11 @@ const AcademicResearcherTemplate = ({ data, accentColor }) => {
                 )}
 
                 {/* Education — top position for academic CV */}
-                {data.education && data.education.length > 0 && (
+                {data.educations && data.educations.length > 0 && (
                     <section>
                         <h2 className="text-base font-bold uppercase tracking-widest mb-3" style={{ color: accentColor }}>Education</h2>
                         <div className="space-y-4">
-                            {data.education.map((edu, i) => (
+                            {data.educations.map((edu, i) => (
                                 <div key={i} className="grid grid-cols-4 gap-4 text-sm" style={{ fontFamily: "'Arial', sans-serif" }}>
                                     <div className="col-span-1 text-right text-gray-500 pt-0.5">
                                         {edu.location && <div className="mb-1">{edu.location}</div>}
@@ -67,15 +67,15 @@ const AcademicResearcherTemplate = ({ data, accentColor }) => {
                 )}
 
                 {/* Experience — called Positions */}
-                {data.experience && data.experience.length > 0 && (
+                {data.experiences && data.experiences.length > 0 && (
                     <section>
                         <h2 className="text-base font-bold uppercase tracking-widest mb-3" style={{ color: accentColor }}>Academic & Professional Positions</h2>
                         <div className="space-y-5">
-                            {data.experience.map((exp, i) => (
+                            {data.experiences.map((exp, i) => (
                                 <div key={i} className="grid grid-cols-4 gap-4 text-sm" style={{ fontFamily: "'Arial', sans-serif" }}>
                                     <div className="col-span-1 text-right text-gray-500 pt-0.5">
                                         {exp.location && <div className="mb-1">{exp.location}</div>}
-                                        {formatDate(exp.start_date)} –<br />{exp.is_current ? "Present" : formatDate(exp.end_date)}
+                                        {formatDate(exp.start_date)} –<br />{exp.is_present ? "Present" : formatDate(exp.end_date)}
                                     </div>
                                     <div className="col-span-3">
                                         <p className="font-semibold text-gray-900">{exp.position}</p>
@@ -101,7 +101,7 @@ const AcademicResearcherTemplate = ({ data, accentColor }) => {
                                     <span className="text-gray-600 italic">{proj.description}</span>
                                     {(proj.tech_stack?.length > 0 || proj.link) && (
                                         <div className="ml-4 mt-1 text-gray-600 flex flex-wrap gap-4 text-xs">
-                                            {proj.tech_stack?.length > 0 && <span><strong>Tech:</strong> {proj.tech_stack.join(", ")}</span>}
+                                            {proj.tech_stack && (Array.isArray(proj.tech_stack) ? proj.tech_stack.length > 0 : String(proj.tech_stack).trim()) && <span><strong>Tech:</strong> {Array.isArray(proj.tech_stack) ? proj.tech_stack.join(", ") : String(proj.tech_stack)}</span>}
                                             {proj.link && <a href={proj.link} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">{proj.link}</a>}
                                         </div>
                                     )}

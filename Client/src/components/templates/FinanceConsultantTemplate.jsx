@@ -44,20 +44,20 @@ const FinanceConsultantTemplate = ({ data, accentColor }) => {
                 <div className="flex gap-10">
                     {/* Left: Experience */}
                     <div className="flex-1">
-                        {data.experience && data.experience.length > 0 && (
+                        {data.experiences && data.experiences.length > 0 && (
                             <section className="mb-7">
                                 <h2 className="text-xs font-bold tracking-widest uppercase text-center mb-4" style={{ color: accentColor }}>
                                     ── Professional Experience ──
                                 </h2>
                                 <div className="space-y-5">
-                                    {data.experience.map((exp, i) => (
+                                    {data.experiences.map((exp, i) => (
                                         <div key={i}>
                                             <div className="flex justify-between items-baseline">
                                                 <h3 className="font-bold text-sm text-gray-900">{exp.position}</h3>
                                                 <div className="text-right">
                                                     {exp.location && <span className="block text-[10px] text-gray-400 uppercase tracking-widest mb-1">{exp.location}</span>}
                                                     <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest bg-gray-100 px-2 py-1 rounded-sm">
-                                                        {formatDate(exp.start_date)} – {exp.is_current ? "Present" : formatDate(exp.end_date)}
+                                                        {formatDate(exp.start_date)} – {exp.is_present ? "Present" : formatDate(exp.end_date)}
                                                     </span>
                                                 </div>
                                             </div>
@@ -91,7 +91,7 @@ const FinanceConsultantTemplate = ({ data, accentColor }) => {
                                             </div>
                                             {(proj.tech_stack?.length > 0 || proj.link) && (
                                                 <div className="flex gap-4 text-gray-500 mt-1 pl-4">
-                                                    {proj.tech_stack?.length > 0 && <span><strong>Tech:</strong> {proj.tech_stack.join(", ")}</span>}
+                                                    {proj.tech_stack && (Array.isArray(proj.tech_stack) ? proj.tech_stack.length > 0 : String(proj.tech_stack).trim()) && <span><strong>Tech:</strong> {Array.isArray(proj.tech_stack) ? proj.tech_stack.join(", ") : String(proj.tech_stack)}</span>}
                                                     {proj.link && <a href={proj.link} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">{proj.link}</a>}
                                                 </div>
                                             )}
@@ -118,11 +118,11 @@ const FinanceConsultantTemplate = ({ data, accentColor }) => {
                             </section>
                         )}
 
-                        {data.education && data.education.length > 0 && (
+                        {data.educations && data.educations.length > 0 && (
                             <section>
                                 <h2 className="text-xs font-bold tracking-widest uppercase mb-3" style={{ color: accentColor }}>Education</h2>
                                 <div className="space-y-4">
-                                    {data.education.map((edu, i) => (
+                                    {data.educations.map((edu, i) => (
                                         <div key={i} className="text-xs" style={{ fontFamily: "'Arial', sans-serif" }}>
                                             <p className="font-bold text-gray-900">{edu.degree}</p>
                                             {edu.field && <p className="text-gray-600">{edu.field}</p>}

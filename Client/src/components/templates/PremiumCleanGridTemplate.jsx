@@ -47,7 +47,7 @@ const PremiumCleanGridTemplate = ({ data, accentColor }) => {
                 )}
 
                 {/* Experience */}
-                {data.experience && data.experience.length > 0 && (
+                {data.experiences && data.experiences.length > 0 && (
                     <section className="mb-8">
                         <div className="grid grid-cols-5 gap-6 mb-3">
                             <div className="col-span-1">
@@ -56,12 +56,12 @@ const PremiumCleanGridTemplate = ({ data, accentColor }) => {
                             <div className="col-span-4 border-b border-gray-200" />
                         </div>
                         <div className="space-y-5">
-                            {data.experience.map((exp, i) => (
+                            {data.experiences.map((exp, i) => (
                                 <div key={i} className="grid grid-cols-5 gap-6">
                                     <div className="col-span-1 text-xs text-gray-400 pt-0.5 leading-relaxed">
                                         {exp.location && <p className="mb-1">{exp.location}</p>}
                                         <p>{formatDate(exp.start_date)}</p>
-                                        <p>– {exp.is_current ? "Present" : formatDate(exp.end_date)}</p>
+                                        <p>– {exp.is_present ? "Present" : formatDate(exp.end_date)}</p>
                                         <p className="mt-1 font-medium text-gray-500">{exp.company}</p>
                                     </div>
                                     <div className="col-span-4">
@@ -95,7 +95,7 @@ const PremiumCleanGridTemplate = ({ data, accentColor }) => {
                                             <p className="text-xs text-gray-600 mt-1 leading-relaxed">{proj.description}</p>
                                         </div>
                                         <div className="mt-2 text-[11px] text-gray-500 space-y-0.5">
-                                            {proj.tech_stack?.length > 0 && <div><strong>Tech:</strong> {proj.tech_stack.join(", ")}</div>}
+                                            {proj.tech_stack && (Array.isArray(proj.tech_stack) ? proj.tech_stack.length > 0 : String(proj.tech_stack).trim()) && <div><strong>Tech:</strong> {Array.isArray(proj.tech_stack) ? proj.tech_stack.join(", ") : String(proj.tech_stack)}</div>}
                                             {proj.link && <div><a href={proj.link} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">{proj.link}</a></div>}
                                         </div>
                                     </div>
@@ -107,14 +107,14 @@ const PremiumCleanGridTemplate = ({ data, accentColor }) => {
 
                 {/* Education + Skills row */}
                 <div className="grid grid-cols-2 gap-8">
-                    {data.education && data.education.length > 0 && (
+                    {data.educations && data.educations.length > 0 && (
                         <section>
                             <div className="flex items-center gap-3 mb-3">
                                 <p className="text-xs font-bold uppercase tracking-widest text-gray-400">Education</p>
                                 <div className="flex-1 h-px bg-gray-200" />
                             </div>
                             <div className="space-y-3">
-                                {data.education.map((edu, i) => (
+                                {data.educations.map((edu, i) => (
                                     <div key={i} className="text-xs">
                                         <p className="font-bold text-gray-900">{edu.degree}{edu.field ? ` in ${edu.field}` : ""}</p>
                                         <p className="text-gray-500">{edu.institution}</p>

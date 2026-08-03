@@ -63,14 +63,14 @@ const ClassicTemplate = ({ data, accentColor }) => {
             )}
 
             {/* Experience */}
-            {data.experience && data.experience.length > 0 && (
+            {data.experiences && data.experiences.length > 0 && (
                 <section className="mb-6">
                     <h2 className="text-xl font-semibold mb-4" style={{ color: accentColor }}>
                         PROFESSIONAL EXPERIENCE
                     </h2>
 
                     <div className="space-y-4">
-                        {data.experience.map((exp, index) => (
+                        {data.experiences.map((exp, index) => (
                             <div key={index} className="border-l-3 pl-4" style={{ borderColor: accentColor }}>
                                 <div className="flex justify-between items-start mb-2">
                                     <div>
@@ -78,7 +78,7 @@ const ClassicTemplate = ({ data, accentColor }) => {
                                         <p className="text-gray-700 font-medium">{exp.company}</p>
                                     </div>
                                     <div className="text-right text-sm text-gray-600">
-                                        <p>{formatDate(exp.start_date)} - {exp.is_current ? "Present" : formatDate(exp.end_date)}</p>
+                                        <p>{formatDate(exp.start_date)} - {exp.is_present ? "Present" : formatDate(exp.end_date)}</p>
                                     </div>
                                 </div>
                                 {exp.description && (
@@ -104,9 +104,12 @@ const ClassicTemplate = ({ data, accentColor }) => {
                             <div key={index} className="flex justify-between items-start border-l-3 border-gray-300 pl-6">
                                 <div>
                                     <li className="font-semibold text-gray-800 ">{proj.name}</li>
-                                    {proj.tech_stack?.length > 0 && (
+                                    {proj.tech_stack && (Array.isArray(proj.tech_stack) ? proj.tech_stack.length > 0 : String(proj.tech_stack).trim()) && (
                                         <p>
-                                            <strong>Tech Stack:</strong> {proj.tech_stack.join(", ")}
+                                            <strong>Tech Stack:</strong>{" "}
+                                            {Array.isArray(proj.tech_stack)
+                                                ? proj.tech_stack.join(", ")
+                                                : String(proj.tech_stack)}
                                         </p>
                                     )}
                                     <p className="text-gray-600">{proj.description}</p>
@@ -126,19 +129,19 @@ const ClassicTemplate = ({ data, accentColor }) => {
                                 </div>
                             </div>
                         ))}
-                    </ul>
+                            </ul>
                 </section>
             )}
 
             {/* Education */}
-            {data.education && data.education.length > 0 && (
+            {data.educations && data.educations.length > 0 && (
                 <section className="mb-6">
                     <h2 className="text-xl font-semibold mb-4" style={{ color: accentColor }}>
                         EDUCATION
                     </h2>
 
                     <div className="space-y-3">
-                        {data.education.map((edu, index) => (
+                        {data.educations.map((edu, index) => (
                             <div key={index} className="flex justify-between items-start">
                                 <div>
                                     <h3 className="font-semibold text-gray-900">

@@ -71,14 +71,14 @@ const TechnicalEngineerTemplate = ({ data, accentColor }) => {
                 )}
 
                 {/* Experience */}
-                {data.experience && data.experience.length > 0 && (
+                {data.experiences && data.experiences.length > 0 && (
                     <section>
                         <div className="text-sm mb-3">
                             <span style={{ color: accentColor }}>$ </span>
                             <span className="text-gray-300">ls -la experience/</span>
                         </div>
                         <div className="space-y-4">
-                            {data.experience.map((exp, i) => (
+                            {data.experiences.map((exp, i) => (
                                 <div key={i} className="bg-gray-900 rounded p-4 border border-gray-800">
                                     <div className="flex justify-between items-start flex-wrap gap-2">
                                         <div>
@@ -89,7 +89,7 @@ const TechnicalEngineerTemplate = ({ data, accentColor }) => {
                                         <div className="flex flex-col items-end">
                                             {exp.location && <span className="text-xs text-gray-500 mb-0.5">{exp.location}</span>}
                                             <span className="text-xs text-gray-500 bg-gray-800 px-2 py-0.5 rounded">
-                                                {formatDate(exp.start_date)} → {exp.is_current ? "now" : formatDate(exp.end_date)}
+                                                {formatDate(exp.start_date)} → {exp.is_present ? "now" : formatDate(exp.end_date)}
                                             </span>
                                         </div>
                                     </div>
@@ -123,7 +123,7 @@ const TechnicalEngineerTemplate = ({ data, accentColor }) => {
                                     <p className="text-xs text-gray-400 mt-0.5 leading-relaxed">{proj.description}</p>
                                     {(proj.tech_stack?.length > 0 || proj.link) && (
                                         <div className="mt-1 flex flex-wrap gap-x-4 gap-y-1 text-xs text-gray-500">
-                                            {proj.tech_stack?.length > 0 && <span>--tech="{proj.tech_stack.join(", ")}"</span>}
+                                            {proj.tech_stack && (Array.isArray(proj.tech_stack) ? proj.tech_stack.length > 0 : String(proj.tech_stack).trim()) && <span>--tech="{Array.isArray(proj.tech_stack) ? proj.tech_stack.join(", ") : String(proj.tech_stack)}"</span>}
                                             {proj.link && <span>--link="<a href={proj.link} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">{proj.link}</a>"</span>}
                                         </div>
                                     )}
@@ -134,14 +134,14 @@ const TechnicalEngineerTemplate = ({ data, accentColor }) => {
                 )}
 
                 {/* Education */}
-                {data.education && data.education.length > 0 && (
+                {data.educations && data.educations.length > 0 && (
                     <section>
                         <div className="text-sm mb-3">
                             <span style={{ color: accentColor }}>$ </span>
                             <span className="text-gray-300">cat education.md</span>
                         </div>
                         <div className="space-y-2">
-                            {data.education.map((edu, i) => (
+                            {data.educations.map((edu, i) => (
                                 <div key={i} className="flex justify-between text-sm">
                                     <div>
                                         <span className="text-gray-200 font-semibold">{edu.degree}{edu.field ? ` in ${edu.field}` : ""}</span>

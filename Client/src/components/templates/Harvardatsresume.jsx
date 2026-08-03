@@ -158,11 +158,11 @@ const HarvardATSResume = ({ data, accentColor }) => {
                     </section>
                 )}
                 {/* ── Experience ──────────────────────────────────────── */}
-                {data.experience && data.experience.length > 0 && (
+                {data.experiences && data.experiences.length > 0 && (
                     <section style={{ marginBottom: "8px" }}>
                         <SectionHeading> Experience</SectionHeading>
                         <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
-                            {data.experience.map((exp, i) => (
+                            {data.experiences.map((exp, i) => (
                                 <div key={i}>
                                     <div style={row}>
                                         <span style={{ ...xs, ...upperBold }}>{exp.company}</span>
@@ -175,7 +175,7 @@ const HarvardATSResume = ({ data, accentColor }) => {
                                         {exp.start_date && (
                                             <span style={{ ...xs, ...noWrap }}>
                                                 {formatDate(exp.start_date)} –{" "}
-                                                {exp.is_current ? "Present" : formatDate(exp.end_date)}
+                                                {exp.is_present ? "Present" : formatDate(exp.end_date)}
                                             </span>
                                         )}
                                     </div>
@@ -213,9 +213,9 @@ const HarvardATSResume = ({ data, accentColor }) => {
                                             </span>
                                         )}
                                     </div>
-                                    {proj.tech_stack?.length > 0 && (
+                                    {proj.tech_stack && (Array.isArray(proj.tech_stack) ? proj.tech_stack.length > 0 : String(proj.tech_stack).trim()) && (
                                         <p style={{ ...xs, margin: "1px 0 0" }}>
-                                            <strong>Tech Stack:</strong> {proj.tech_stack.join(", ")}
+                                            <strong>Tech Stack:</strong> {Array.isArray(proj.tech_stack) ? proj.tech_stack.join(", ") : String(proj.tech_stack)}
                                         </p>
                                     )}
                                     {proj.description && (
@@ -264,11 +264,11 @@ const HarvardATSResume = ({ data, accentColor }) => {
                     </section>
                 )}
                 {/* ── Education ────────────────────────────────────────────────── */}
-                {data.education && data.education.length > 0 && (
+                {data.educations && data.educations.length > 0 && (
                     <section style={{ marginBottom: "6px" }}>
                         <SectionHeading>Education</SectionHeading>
                         <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
-                            {data.education.map((edu, i) => (
+                            {data.educations.map((edu, i) => (
                                 <div key={i}>
                                     <div style={row}>
                                         <span style={{ ...xs, ...upperBold }}>{edu.institution}</span>
