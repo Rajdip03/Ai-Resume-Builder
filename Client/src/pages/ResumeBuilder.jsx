@@ -134,7 +134,21 @@ const ResumeBuilder = () => {
   }, [resumeId, token])
 
   const changeResumeVisibility = async () => {
-    setResumeData({ ...resumeData, public: !resumeData.public })
+    try {
+      const formData = new FormData()
+      formData.append("resumeId", resumeId)
+      formData.append("resumeData", JSON.stringify({
+        public: !resumeData.public
+      }))
+      formData.append("removeBackground", removeBackground)
+
+      const { data } = await api.put(`/api/resumes/update`, formData, { headers: { Authorization: token } })
+
+      setResumeData({ ...resumeData, public: !resumeData.public })
+      toast.success(data.message)
+    } catch (error) {
+      toast.error("Error saving resume:",error);
+    }
   }
   const handleShare = () => {
     const frontendUrl = window.location.href.split('/app/')[0];
