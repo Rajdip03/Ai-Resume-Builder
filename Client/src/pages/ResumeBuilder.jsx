@@ -78,7 +78,7 @@ const ResumeBuilder = () => {
     setIsSaving(true);
 
     try {
-      await new Promise(resolve => setTimeout(resolve, 600));
+      let updatedResumeData = structuredClone(resumeData);
 
       const savedResumes = JSON.parse(localStorage.getItem('saved_resumes') || '[]');
 
@@ -108,8 +108,8 @@ const ResumeBuilder = () => {
         navigate(`/app/builder/${updatedData._id}`, { replace: true });
       }
     } catch (error) {
-      console.error("Failed to save:", error);
-      toast.error("An error occurred while saving.");
+      console.error("Error saving resume:", error);
+      toast.error(error?.response?.data?.message || "Error saving resume");
     } finally {
       setIsSaving(false);
     }
@@ -147,7 +147,7 @@ const ResumeBuilder = () => {
       setResumeData({ ...resumeData, public: !resumeData.public })
       toast.success(data.message)
     } catch (error) {
-      toast.error("Error saving resume:",error);
+      toast.error("Error saving resume:", error);
     }
   }
   const handleShare = () => {
