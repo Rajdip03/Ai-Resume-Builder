@@ -78,38 +78,30 @@ const ResumeBuilder = () => {
     setIsSaving(true);
 
     try {
+      const formData = new FormData();
+      formData.append("resumeId", resumeId);
+      formData.append("removeBackground", removeBackground);
+
       let updatedResumeData = structuredClone(resumeData);
 
-      const savedResumes = JSON.parse(localStorage.getItem('saved_resumes') || '[]');
+      if (updatedResumeData.personal_info && updatedResumeData.personal_info.image instanceof File) {
+        formData.append("image", updatedResumeData.personal_info.image);
+        delete updatedResumeData.personal_info.image;
+      }
 
-      let updatedData = { ...resumeData };
-      let isNew = false;
+      formData.append("resumeData", JSON.stringify(updatedResumeData));
 
-      if (!updatedData._id || updatedData._id === 'new') {
-        updatedData._id = Date.now().toString();
-        if (!updatedData.title) updatedData.title = `Resume - ${updatedData.personal_info.full_name}`;
-
-        savedResumes.push(updatedData);
-        isNew = true;
-      } else {
-        const index = savedResumes.findIndex(r => r._id === updatedData._id);
-        if (index >= 0) {
-          savedResumes[index] = updatedData;
-        } else {
-          savedResumes.push(updatedData);
+      const { data } = await api.put("/api/resumes/update", formData, {
+        headers: {
+          Authorization: token
         }
-      }
+      });
 
-      localStorage.setItem('saved_resumes', JSON.stringify(savedResumes));
-      setResumeData(updatedData);
-      toast.success("Resume saved successfully!");
-
-      if (isNew) {
-        navigate(`/app/builder/${updatedData._id}`, { replace: true });
-      }
+      setResumeData(data.resume);
+      toast.success(data.message);
     } catch (error) {
       console.error("Error saving resume:", error);
-      toast.error(error?.response?.data?.message || "Error saving resume");
+      toast.error(error.response?.data?.message || "Error saving resume");
     } finally {
       setIsSaving(false);
     }
