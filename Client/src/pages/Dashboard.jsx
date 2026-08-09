@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import api from "../configs/api";
 import toast from "react-hot-toast";
 import pdfToText from 'react-pdftotext'
+import ResumeChatbot from '../components/ResumeChatbot'
 
 const Dashboard = () => {
 
@@ -199,6 +200,9 @@ const Dashboard = () => {
           )
         }
       </div>
+
+      {/* AI Resume Chatbot */}
+      <ResumeChatbot />
     </div>
   );
 };

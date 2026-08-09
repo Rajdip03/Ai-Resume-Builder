@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useMemo } from 'react'
 import { Link, useParams, useNavigate } from 'react-router-dom'
 import toast, { Toaster } from 'react-hot-toast';
 import { dummyResumeData } from '../assets/assets';
@@ -12,6 +12,7 @@ import ExperienceForm from '../components/ExperienceForm';
 import EducationForm from '../components/EducationForm';
 import ProjectForm from '../components/ProjectForm';
 import SkillsForm from '../components/SkillsForm';
+import ResumeChatbot from '../components/ResumeChatbot';
 import { useSelector } from 'react-redux';
 import api from '../configs/api';
 
@@ -154,6 +155,17 @@ const ResumeBuilder = () => {
   const downloadResume = () => {
     window.print();
   }
+  // Build resume context for the chatbot
+  const resumeContext = useMemo(() => {
+    const ctx = {};
+    if (resumeData.personal_info?.profession) ctx.profession = resumeData.personal_info.profession;
+    if (resumeData.professional_summary) ctx.professionalSummary = resumeData.professional_summary;
+    if (resumeData.skills?.length > 0) ctx.skills = resumeData.skills;
+    if (resumeData.experiences?.length > 0) ctx.experiences = resumeData.experiences;
+    if (resumeData.educations?.length > 0) ctx.educations = resumeData.educations;
+    return Object.keys(ctx).length > 0 ? ctx : null;
+  }, [resumeData]);
+
   return (
     <div>
       <Toaster position="top-right" />
@@ -255,6 +267,9 @@ const ResumeBuilder = () => {
           </div>
         </div>
       </div>
+
+      {/* AI Resume Chatbot */}
+      <ResumeChatbot resumeContext={resumeContext} />
     </div>
   )
 }
