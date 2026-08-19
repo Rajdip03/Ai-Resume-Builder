@@ -8,6 +8,113 @@ import toast from "react-hot-toast";
 import pdfToText from 'react-pdftotext'
 import ResumeChatbot from '../components/ResumeChatbot'
 
+// Floating chatbot mascot with auto speech bubble
+const ChatbotMascot = () => {
+  const [showBubble, setShowBubble] = React.useState(false);
+
+  React.useEffect(() => {
+    const timer = setTimeout(() => setShowBubble(true), 1000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  return (
+    <>
+      <div
+        className="fixed right-5 z-40 print:hidden"
+        style={{ bottom: '88px' }}
+      >
+        {/* Speech Bubble */}
+        {showBubble && (
+          <div
+            style={{
+              position: 'absolute',
+              right: '70px',
+              bottom: '12px',
+              background: 'linear-gradient(135deg, #7c3aed, #6366f1)',
+              color: '#fff',
+              padding: '10px 16px',
+              borderRadius: '16px 16px 4px 16px',
+              fontSize: '13px',
+              fontWeight: 600,
+              whiteSpace: 'nowrap',
+              boxShadow: '0 4px 20px rgba(99, 102, 241, 0.35)',
+              animation: 'chatMascotFadeIn 0.5s ease-out',
+              letterSpacing: '0.2px',
+            }}
+          >
+            hey! how can i help You
+            <button
+              onClick={() => setShowBubble(false)}
+              style={{
+                position: 'absolute',
+                top: '-6px',
+                right: '-6px',
+                width: '18px',
+                height: '18px',
+                borderRadius: '50%',
+                background: '#1e1b4b',
+                color: '#fff',
+                border: 'none',
+                fontSize: '11px',
+                lineHeight: '18px',
+                textAlign: 'center',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                boxShadow: '0 2px 6px rgba(0,0,0,0.2)',
+              }}
+              aria-label="Close speech bubble"
+            >
+              ×
+            </button>
+            {/* Bubble tail */}
+            <div
+              style={{
+                position: 'absolute',
+                bottom: '6px',
+                right: '-6px',
+                width: 0,
+                height: 0,
+                borderLeft: '8px solid #6366f1',
+                borderTop: '6px solid transparent',
+                borderBottom: '6px solid transparent',
+              }}
+            />
+          </div>
+        )}
+
+        {/* Mascot Image */}
+        <img
+          src="/image_280bee.png"
+          alt="Chatbot Mascot"
+          style={{
+            width: '58px',
+            height: '58px',
+            objectFit: 'contain',
+            borderRadius: '50%',
+            filter: 'drop-shadow(0 4px 12px rgba(99, 102, 241, 0.3))',
+            animation: 'chatMascotFloat 3s ease-in-out infinite',
+            cursor: 'pointer',
+          }}
+          onClick={() => setShowBubble((prev) => !prev)}
+        />
+      </div>
+
+      <style>{`
+        @keyframes chatMascotFadeIn {
+          from { opacity: 0; transform: translateY(8px) scale(0.9); }
+          to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        @keyframes chatMascotFloat {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-4px); }
+        }
+      `}</style>
+    </>
+  );
+};
+
 const Dashboard = () => {
 
   const { user, token } = useSelector(state => state.auth)
@@ -200,6 +307,9 @@ const Dashboard = () => {
           )
         }
       </div>
+
+      {/* Floating Chatbot Mascot Image & Speech Bubble */}
+      <ChatbotMascot />
 
       {/* AI Resume Chatbot */}
       <ResumeChatbot />
