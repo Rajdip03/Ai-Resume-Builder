@@ -1,11 +1,14 @@
 import jwt from 'jsonwebtoken';
 
 const protect = async (req, res, next) => {
-    const token = req.headers.authorization; // if user already loggedin then we will send header(authorization)
+    const authHeader = req.headers.authorization; // if user already loggedin then we will send header(authorization)
 
-    if (!token) {
+    if (!authHeader) {
         return res.status(401).json({ message: 'unauthorized' });
     }
+
+    // Support both "Bearer <token>" and raw "<token>" formats
+    const token = authHeader.startsWith('Bearer ') ? authHeader.slice(7) : authHeader;
 
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET)
