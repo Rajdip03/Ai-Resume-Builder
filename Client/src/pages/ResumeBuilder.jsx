@@ -211,7 +211,7 @@ const ResumeBuilder = () => {
                   <PersonalInfoForm data={resumeData.personal_info} onChange={(data) => setResumeData(prev => ({ ...prev, personal_info: data }))} removeBackground={removeBackground} setRemoveBackground={setRemoveBackground} />
                 )}
                 {activeSection.id === "summary" && (
-                  <ProfessionalSummaryForm data={resumeData.professional_summary} onChange={(data) => setResumeData(prev => ({ ...prev, professional_summary: data }))} />
+                  <ProfessionalSummaryForm data={resumeData.professional_summary} onChange={(data) => setResumeData(prev => ({ ...prev, professional_summary: data }))} setResumeData={setResumeData} />
                 )}
                 {activeSection.id === "experience" && (
                   <ExperienceForm data={resumeData.experiences} onChange={(data) => setResumeData(prev => ({ ...prev, experiences: data }))} />
