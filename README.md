@@ -1,4 +1,5 @@
-# 🤖 AI Resume Builder
+# 🤖 ResumeForge AI
+AI-Powered Resume Builder with ATS Analysis & Career Assistance
 
 [![Status](https://img.shields.io/badge/Status-Done-orange.svg)]()
 [![MERN Stack](https://img.shields.io/badge/Stack-MERN-blue.svg)]()
