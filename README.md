@@ -4,7 +4,7 @@ AI-Powered Resume Builder with ATS Analysis & Career Assistance
 [![Status](https://img.shields.io/badge/Status-Done-orange.svg)]()
 [![MERN Stack](https://img.shields.io/badge/Stack-MERN-blue.svg)]()
 
-A robust, full-stack MERN application designed to streamline and automate professional resume creation. Leveraging advanced AI content generation and automated image processing, this platform empowers users to build polished, recruiter-ready resumes in minutes and share them effortlessly via dynamic live links.
+ResumeForge AI is a full-stack MERN application that enables users to create, customize, analyze, and share professional resumes using AI-powered content generation, an interactive resume assistant, and ATS optimization tools.
 
 ---
 
