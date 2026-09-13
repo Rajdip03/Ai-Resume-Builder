@@ -1,6 +1,6 @@
 # 🤖 AI Resume Builder
 
-[![Status](https://img.shields.io/badge/Status-Work%20In%20Progress-orange.svg)]()
+[![Status](https://img.shields.io/badge/Status-Done-orange.svg)]()
 [![MERN Stack](https://img.shields.io/badge/Stack-MERN-blue.svg)]()
 
 A robust, full-stack MERN application designed to streamline and automate professional resume creation. Leveraging advanced AI content generation and automated image processing, this platform empowers users to build polished, recruiter-ready resumes in minutes and share them effortlessly via dynamic live links.
@@ -10,7 +10,11 @@ A robust, full-stack MERN application designed to streamline and automate profes
 ## 🚀 Key Features
 
 * 🔐 **Secure Authentication:** Robust and secure user login and signup system to protect personal user data.
-* 🧠 **AI-Powered Content Generation:** Seamless integration with Google Gemini AI to craft compelling job descriptions, professional summaries, and optimized skill highlights.
+* 🧠 **AI-Powered Content Generation:** Seamless integration with Google Gemini AI to craft compelling job descriptions, professional summaries, and optimized
+* 🧠 **AI Chat Bot:** Interactive AI assistant to help users create, improve, and customize resume content.
+* 📄 **ATS Scanner:** Analyzes resumes for ATS compatibility and provides actionable improvement suggestions. 
+
+skill highlights.
 * 🖼️ **Automated Background Removal:** Built-in smart image processing tools to instantly clean up and format professional profile headshots.
 * 📊 **Interactive Dashboard:** A centralized, intuitive workspace to seamlessly manage multiple resumes (Create, Edit, Delete).
 * ✏️ **Live Real-Time Editor:** Modern, reactive interface to tailor Personal Info, Professional Experience, Education, and Skills with an instant preview.
