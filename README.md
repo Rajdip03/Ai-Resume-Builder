@@ -1,5 +1,5 @@
-# 🤖 ResumeForge AI
-AI-Powered Resume Builder with ATS Analysis & Career Assistance
+# 🤖 CareerForge AI
+Create smarter resumes, enhance content using AI, ask from AI Chat bot, optimize for ATS, and practice with AI-powered interviews — all in one place.
 
 [![Status](https://img.shields.io/badge/Status-Done-orange.svg)]()
 [![MERN Stack](https://img.shields.io/badge/Stack-MERN-blue.svg)]()
