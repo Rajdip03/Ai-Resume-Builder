@@ -21,7 +21,7 @@ const Hero = () => {
                 {/* Navbar */}
                 <nav className="z-50 flex items-center justify-between w-full py-4 px-6 md:px-16 lg:px-24 xl:px-40 text-sm">
                     <a href="#">
-                        <img src="/logo.svg" alt="logo" className='h-11 w-auto' />
+                        <img src="/title.svg" alt="CareerForge AI" className='h-10 w-auto' />
                     </a>
 
                     <div className="hidden md:flex items-center gap-8 transition duration-500 text-slate-800">
@@ -89,10 +89,10 @@ const Hero = () => {
 
                     {/* Headline + CTA */}
                     <h1 className="text-5xl md:text-6xl font-semibold max-w-5xl text-center mt-4 md:leading-[70px]">
-                        Get your dream job with <span className=" bg-gradient-to-r from-green-700 to-green-600 bg-clip-text text-transparent text-nowrap">AI-powered </span> Resume.
+                        Prepare Smarter. Interview Better. <span className=" bg-gradient-to-r from-green-700 to-green-600 bg-clip-text text-transparent text-nowrap"> Get Hired. </span>
                     </h1>
 
-                    <p className="max-w-md text-center text-base my-7">Create, edit and download professional resume with AI-powered assistance.</p>
+                    <p className="max-w-md text-center text-base my-7">Create smarter resumes,Enhance using AI, optimize for ATS, Ask from AI Chat bot and practice with AI-powered interviews — all in one place.</p>
 
                     {/* CTA Buttons */}
                     <div className="flex items-center gap-4 ">

@@ -8,7 +8,7 @@ const Footer = () => {
             <footer className="flex flex-wrap justify-center lg:justify-between overflow-hidden gap-10 md:gap-20 py-16 px-6 md:px-16 lg:px-24 xl:px-32 text-[13px] text-gray-500 bg-gradient-to-r from-white via-green-200/60 to-white mt-40">
                 <div className="flex flex-wrap items-start gap-10 md:gap-[60px] xl:gap-[140px]">
                     <a href="#">
-                        <img src="/logo.svg" alt="logo" className='h-11 w-auto' />
+                        <img src="/title.svg" alt="logo" className='h-11 w-auto' />
                     </a>
                     <div>
                         <p className="text-slate-800 font-semibold">Product</p>
@@ -54,7 +54,7 @@ const Footer = () => {
                             </svg>
                         </a>
                     </div>
-                    <p className="mt-3 text-center">© {new Date().getFullYear()} AI Resume Builder Develop by <p className='hover:text-green-500'>Rajdip Mondal</p></p>
+                    <p className="mt-3 text-center">© {new Date().getFullYear()} CareerForge AI Develop by <p className='hover:text-green-500'>Rajdip Mondal</p></p>
                 </div>
             </footer>
             <style>{`
