@@ -7,6 +7,10 @@ import ResumeBuilder from './pages/ResumeBuilder'
 import Login from './pages/Login'
 import Preview from './pages/preview';
 import ATSReport from './pages/ATSReport';
+import InterviewSetup from './pages/InterviewSetup';
+import InterviewSession from './pages/InterviewSession';
+import InterviewReport from './pages/InterviewReport';
+import InterviewHistory from './pages/InterviewHistory';
 import { useDispatch } from 'react-redux';
 import api from './configs/api';
 import { login, setLoading } from './app/features/authSlice';
@@ -45,6 +49,10 @@ const App = () => {
           <Route index element={<Dashboard />} />       {/* Sub Route */}
           <Route path='builder/:resumeId' element={<ResumeBuilder />} />  {/* Sub Route */}
           <Route path='ats/:resumeId' element={<ATSReport />} />
+          <Route path='interview' element={<InterviewSetup />} />
+          <Route path='interview/session/:id' element={<InterviewSession />} />
+          <Route path='interview/report/:id' element={<InterviewReport />} />
+          <Route path='interview/history' element={<InterviewHistory />} />
         </Route>
 
         <Route path='view/:resumeId' element={<Preview />} />

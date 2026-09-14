@@ -7,6 +7,7 @@ import resumeRouter from "./routes/resumeRoutes.js";
 import aiRouter from "./routes/aiRoutes.js";
 import atsRouter from "./routes/atsRoutes.js";
 import chatbotRouter from "./routes/chatbotRoutes.js";
+import interviewRouter from "./routes/interviewRoutes.js";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -27,6 +28,7 @@ app.use('/api/resumes', resumeRouter);
 app.use('/api/ai', aiRouter);
 app.use('/api/ats', atsRouter);
 app.use('/api/chatbot', chatbotRouter);
+app.use('/api/interviews', interviewRouter);
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
