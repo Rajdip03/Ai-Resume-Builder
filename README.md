@@ -4,7 +4,7 @@ Create smarter resumes, enhance content using AI, ask from AI Chat bot, optimize
 [![Status](https://img.shields.io/badge/Status-Done-orange.svg)]()
 [![MERN Stack](https://img.shields.io/badge/Stack-MERN-blue.svg)]()
 
-ResumeForge AI is a full-stack MERN application that enables users to create, customize, analyze, and share professional resumes using AI-powered content generation, an interactive resume assistant, and ATS optimization tools.
+CareerForge AI is a full-stack MERN application that enables users to create, customize, analyze, and share professional resumes using AI-powered content generation, an interactive resume assistant, and ATS optimization tools.
 
 ---
 
@@ -18,7 +18,8 @@ ResumeForge AI is a full-stack MERN application that enables users to create, cu
 * 📊 **Interactive Dashboard:** A centralized, intuitive workspace to seamlessly manage multiple resumes (Create, Edit, Delete).
 * ✏️ **Live Real-Time Editor:** Modern, reactive interface to tailor Personal Info, Professional Experience, Education, and Skills with an instant preview.
 * 🔗 **Instant Sharing & Export:** Generate unique, live URL links optimized for recruiters to view resumes instantly, anywhere.
-
+* 📄 **AI Voice Interview:** Select your resume, Put your Job role and description, select Interview Level (Easy, Medium, Hard), select number of qestions and then let's start interview with AI assistant Live.
+   
 ---
 
 ## 🛠️ Tech Stack
