@@ -1,10 +1,4 @@
-/**
- * Abstracted Speech Service for the AI Interview feature.
- * Uses browser Web Speech APIs. Designed to be replaceable
- * with a dedicated provider without touching the interview engine.
- */
-
-// ─── Text-to-Speech ─────────────────────────────────────────────
+// Text-to-Speech
 
 let currentUtterance = null;
 
@@ -63,20 +57,18 @@ export const stopSpeaking = () => {
     currentUtterance = null;
 };
 
-/**
- * Returns true if TTS is currently speaking.
- */
+
+// Returns true if TTS is currently speaking.
+ 
 export const isSpeaking = () => {
     return window.speechSynthesis?.speaking || false;
 };
 
-// ─── Speech-to-Text ─────────────────────────────────────────────
+// Speech-to-Text
 
 let recognition = null;
 
-/**
- * Checks if Speech Recognition is supported.
- */
+// Checks if Speech Recognition is supported.
 export const isSpeechRecognitionSupported = () => {
     return !!(window.SpeechRecognition || window.webkitSpeechRecognition);
 };
@@ -170,11 +162,9 @@ export const stopListening = () => {
     }
 };
 
-// ─── Microphone Permission ──────────────────────────────────────
+// Microphone Permission
 
-/**
- * Requests microphone permission and returns true if granted.
- */
+// Requests microphone permission and returns true if granted.
 export const requestMicrophonePermission = async () => {
     try {
         const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
