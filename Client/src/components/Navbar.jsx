@@ -16,7 +16,7 @@ export const Navbar = () => {
     <div className="shadow bg-white">
       <nav className="flex items-center justify-between max-w-7xl mx-auto py-3.5 px-4 text-slate-800 transition-all">
         <Link to="/">
-          <img src="/title.svg" alt="logo" className="h-11 w-auto" />
+          <img src="/title.svg" alt="CareerForge AI" className="h-11 w-auto" />
         </Link>
         <div className="flex items-center gap-4 text-sm">
           <Link
