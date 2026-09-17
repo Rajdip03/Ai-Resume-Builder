@@ -17,9 +17,9 @@ export const speak = (text, options = {}) => {
         window.speechSynthesis.cancel();
 
         const utterance = new SpeechSynthesisUtterance(text);
-        utterance.rate = options.rate || 0.95;
-        utterance.pitch = options.pitch || 1;
-        utterance.volume = options.volume || 1;
+        utterance.rate = options.rate || 0.95; // control speaking speed
+        utterance.pitch = options.pitch || 1; // Pitch controls how high or low the voice sounds.
+        utterance.volume = options.volume || 1; // Volume controls how loud or soft the voice sounds.
 
         // Try to pick a good English voice
         const voices = window.speechSynthesis.getVoices();
