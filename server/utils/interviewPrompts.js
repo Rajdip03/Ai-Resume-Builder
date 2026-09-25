@@ -1,11 +1,7 @@
-/**
- * Centralized prompt templates for the AI Interview feature.
- * Keeps prompts out of controllers for maintainability.
- */
+//Centralized prompt templates for the AI Interview feature. 
 
-/**
- * Builds the system prompt for generating interview questions.
- */
+// system prompt for generating interview questions.
+
 export const buildQuestionGenerationPrompt = ({ resumeText, jobTitle, jobDescription, interviewType, difficulty, totalQuestions }) => {
     const jdSection = jobDescription
         ? `\nJob Description:\n${jobDescription}\n`
@@ -47,9 +43,8 @@ Generate exactly ${totalQuestions} questions.`,
     };
 };
 
-/**
- * Builds the prompt for evaluating a single interview answer.
- */
+// the prompt for evaluating a single interview answer.
+
 export const buildAnswerEvaluationPrompt = ({ resumeText, jobTitle, jobDescription, question, answer, interviewContext }) => {
     const contextSection = interviewContext
         ? `\nPrevious interview context:\n${interviewContext}\n`
@@ -96,9 +91,8 @@ Schema:
     };
 };
 
-/**
- * Builds the prompt for generating the final comprehensive interview report.
- */
+// the prompt for generating the final comprehensive interview report.
+
 export const buildFinalReportPrompt = ({ resumeText, jobTitle, jobDescription, questionsAndAnswers }) => {
     const qaText = questionsAndAnswers.map((qa, i) =>
         `Q${i + 1} [${qa.category}]: ${qa.question}\nAnswer: ${qa.answer || "(No answer provided)"}\nScore: ${qa.score}/10`
