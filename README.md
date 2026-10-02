@@ -30,7 +30,8 @@ CareerForge AI is a full-stack MERN application that enables users to create, cu
 | **Backend** | Node.js, Express.js |
 | **Database** | MongoDB |
 | **AI Integration** | Google Gemini AI |
-
+| **WEB SERVICE API**| Speech Synthesis API, Speech Recognition API
+| **IMAGE KIT** | Image Kit 
 ---
 
 ## ⚙️ Getting Started
@@ -41,7 +42,8 @@ Follow these steps to set up the project locally.
 * Node.js installed (v16+ recommended)
 * MongoDB instance (local or Atlas)
 * Google Gemini API Key
-
+* Web Brower API for AI Interview 
+* Image Kit API for Store user Images into Resume.
 ### Installation
 
 1. **Clone the repository:**
