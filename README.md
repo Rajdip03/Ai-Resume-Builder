@@ -44,8 +44,13 @@ Follow these steps to set up the project locally.
 * Google Gemini API Key
 * Web Brower API for AI Interview 
 * Image Kit API for Store user Images into Resume.
-### Installation
 
-1. **Clone the repository:**
-   ```bash
-   git clone [https://github.com/Rajdip03/Ai-Resume-Builder.git]
+## 📄 License
+
+Copyright © 2026 Rajdip Mondal. All Rights Reserved.
+
+CareerForge AI is proprietary software. The source code is publicly available for viewing purposes only.
+
+You may not copy, modify, distribute, reproduce, or use any part of this project's source code without prior written permission from the copyright holder.
+
+See [`LICENSE.md`](./LICENSE.md) for the complete license terms.
