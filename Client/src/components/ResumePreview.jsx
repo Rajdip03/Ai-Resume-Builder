@@ -11,7 +11,7 @@ import ExecutiveBoardroomTemplate from './templates/ExecutiveBoardroomTemplate.j
 import FinanceConsultantTemplate from './templates/FinanceConsultantTemplate.jsx'
 import StartupFounderTemplate from './templates/StartupFounderTemplate.jsx'
 import TechnicalEngineerTemplate from './templates/TechnicalEngineerTemplate.jsx'
-import HarvardATSResume from './templates/HarvardATSResume.jsx'
+import HarvardATSResume from './templates/Harvardatsresume.jsx'
 
 const ResumePreview = ({data, template, accentColor, classes=""}) => {
 
