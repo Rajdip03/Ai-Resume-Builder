@@ -107,8 +107,8 @@ const Hero = () => {
 
                     <p className="py-6 text-slate-600 mt-14">Trusting by leading brands, including</p>
 
-                    <div className="flex flex-wrap justify-between max-sm:justify-center gap-6 max-w-3xl w-full mx-auto py-4" id="logo-container">
-                        {logos.map((logo, index) => <img key={index} src={logo} alt="logo" className="h-6 w-auto max-w-xs" />)}
+                    <div className="flex flex-wrap sm:flex-nowrap justify-between max-sm:justify-center gap-6 max-w-3xl w-full mx-auto py-4" id="logo-container">
+                        {logos.map((logo, index) => <img key={index} src={logo} alt="logo" className="h-8 w-auto max-w-xs object-contain" />)}
                     </div>
                 </div>
             </div>
