@@ -39,7 +39,7 @@ const Footer = () => {
                     </div>
                 </div>
                 <div className="flex flex-col max-md:items-center max-md:text-center gap-2 items-end">
-                    <p className="max-w-60">Making every customer feel valued—no matter the size of your audience.</p>
+                    <p className="max-w-60">Making every customer feel valued no matter the size of your audience.</p>
                     <div className="flex items-center gap-4 mt-3">
                         <a href="https://www.linkedin.com/in/rajdip-mondal-54a877296" target="_blank" rel="noreferrer">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-linkedin size-5 hover:text-green-500" aria-hidden="true">
