@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="220" height="48" viewBox="0 0 220 48" fill="none">
+  <path d="M24 4 43 14.8v18.4L24 44 5 33.2V14.8L24 4Z" fill="#E7F5EB"/>
+  <path d="M24 10v27M12 17l24 14M36 17 12 31" stroke="#21834A" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="24" cy="24" r="4" fill="#72B982"/>
+  <text x="56" y="32" fill="#19382A" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="700">arborly</text>
+</svg>

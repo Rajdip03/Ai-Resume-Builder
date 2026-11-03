@@ -1,19 +1,18 @@
 import React from 'react'
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import ArborlyLogo from '../../assets/logos/arborly.svg';
+import MorrowLogo from '../../assets/logos/morrow.svg';
+import FieldnoteLogo from '../../assets/logos/fieldnote.svg';
+import CircuitaLogo from '../../assets/logos/circuita.svg';
+import BrioformLogo from '../../assets/logos/brioform.svg';
 
 const Hero = () => {
 
     const { user } = useSelector(state => state.auth)
 
     const [menuOpen, setMenuOpen] = React.useState(false);
-    const logos = [
-        'https://saasly.prebuiltui.com/assets/companies-logo/instagram.svg',
-        'https://saasly.prebuiltui.com/assets/companies-logo/framer.svg',
-        'https://saasly.prebuiltui.com/assets/companies-logo/microsoft.svg',
-        'https://saasly.prebuiltui.com/assets/companies-logo/huawei.svg',
-        'https://saasly.prebuiltui.com/assets/companies-logo/walmart.svg',
-    ]
+    const logos = [ArborlyLogo, MorrowLogo, FieldnoteLogo, CircuitaLogo, BrioformLogo]
 
     return (
         <>

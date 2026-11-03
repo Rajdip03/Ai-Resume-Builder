@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="220" height="48" viewBox="0 0 220 48" fill="none">
+  <rect x="4" y="4" width="40" height="40" rx="14" fill="#F8EEE4"/>
+  <path d="M14 31V17h8a4 4 0 0 1 0 8h-8m10 0h3a4 4 0 1 1 0 8h-3" stroke="#BA6A3C" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M32 13h4" stroke="#D39B4D" stroke-width="3" stroke-linecap="round"/>
+  <text x="56" y="32" fill="#4A3428" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700">brioform</text>
+</svg>
